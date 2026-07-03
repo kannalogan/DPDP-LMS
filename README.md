@@ -53,6 +53,19 @@ npm run build
 - [DPDP compliance blueprint](docs/09-compliance-dpdp-blueprint.md)
 - [Open risks and decisions](docs/10-open-risks-and-decisions.md)
 
+### Master Engine Architecture
+
+- [Master engine architecture](docs/11-master-engine-architecture.md)
+- [Engine boundary rules](docs/12-engine-boundary-rules.md)
+- [Event catalog](docs/13-event-catalog.md)
+- [Workflow catalog](docs/14-workflow-catalog.md)
+- [Engine-to-database map](docs/15-engine-to-database-map.md)
+- [Engine-to-UI map](docs/16-engine-to-ui-map.md)
+- [Engine-to-AI map](docs/17-engine-to-ai-map.md)
+- [Engine security rules](docs/18-engine-security-rules.md)
+- [Engine testing strategy](docs/19-engine-testing-strategy.md)
+- [Engine implementation sequence](docs/20-engine-implementation-sequence.md)
+
 ### Engineering Standards
 
 - [Architecture summary](ARCHITECTURE.md)
