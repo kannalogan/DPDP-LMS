@@ -39,11 +39,27 @@ npm run build
 
 ## Documentation
 
-- `ARCHITECTURE.md`
-- `docs/ARCHITECTURE.md`
-- `docs/folders.md`
-- `docs/development/onboarding.md`
-- `docs/standards/environment.md`
-- `docs/standards/security.md`
-- `docs/standards/performance.md`
-- `docs/standards/accessibility.md`
+### Product And Data Architecture
+
+- [Source audit](docs/00-source-audit.md)
+- [Master product map](docs/01-master-product-map.md)
+- [Module map](docs/02-module-map.md)
+- [Database blueprint](docs/03-database-blueprint.md)
+- [RLS and security model](docs/04-rls-security-model.md)
+- [API and service blueprint](docs/05-api-service-blueprint.md)
+- [Feature-first folder map](docs/06-feature-folder-map.md)
+- [Implementation roadmap](docs/07-implementation-roadmap.md)
+- [AI engine blueprint](docs/08-ai-engine-blueprint.md)
+- [DPDP compliance blueprint](docs/09-compliance-dpdp-blueprint.md)
+- [Open risks and decisions](docs/10-open-risks-and-decisions.md)
+
+### Engineering Standards
+
+- [Architecture summary](ARCHITECTURE.md)
+- [Extended architecture](docs/architecture.md)
+- [Current folder guide](docs/folders.md)
+- [Developer onboarding](docs/development/onboarding.md)
+- [Environment standard](docs/standards/environment.md)
+- [Security standard](docs/standards/security.md)
+- [Performance standard](docs/standards/performance.md)
+- [Accessibility standard](docs/standards/accessibility.md)
