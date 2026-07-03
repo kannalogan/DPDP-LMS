@@ -31,4 +31,3 @@ export const learningTrackRegistry: LearningTrackDefinition[] = [
     description: "Responsible AI, governance, productivity, and technical enablement."
   }
 ];
-

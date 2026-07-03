@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  typedRoutes: true
+  poweredByHeader: false,
+  reactStrictMode: true,
+  typedRoutes: true,
+  images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react"]
+  }
 };
 
 export default nextConfig;

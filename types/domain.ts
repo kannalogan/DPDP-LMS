@@ -22,4 +22,3 @@ export interface TenantScopedEntity {
   createdAt: string;
   updatedAt: string;
 }
-

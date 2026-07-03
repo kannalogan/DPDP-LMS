@@ -1,0 +1,18 @@
+name: Deployment Placeholder
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deployment-plan:
+    name: Deployment plan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Document deployment flow
+        run: |
+          echo "Future deployment pipeline:"
+          echo "1. Validate GitHub CI artifact"
+          echo "2. Promote through Vercel environment"
+          echo "3. Apply reviewed Supabase migrations"
+          echo "4. Run readiness checks"
+          echo "5. Keep previous Vercel deployment available for rollback"

@@ -23,4 +23,3 @@ export async function routeAiGeneration(request: AiGenerationRequest): Promise<A
     `AI provider '${provider}' is not configured yet. Add provider adapters under features/ai/providers.`
   );
 }
-

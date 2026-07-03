@@ -1,42 +1,27 @@
-# Architecture
+# SYRA Architecture
 
-SYRA is a multi-tenant, AI-first LMS where regulatory or professional subject areas are modeled as learning tracks. DPDP is the first track, not the platform boundary.
+This document extends the architecture summary in `docs/architecture.md`.
 
-## Core Principles
+## Non-Negotiables
 
-- Tenant isolation is enforced in PostgreSQL with organization-scoped tables and Row Level Security.
-- Roles are membership based, not hard-coded to one product area.
-- Learning tracks, courses, modules, lessons, assessments, attempts, certificates, and AI interactions are reusable across domains.
-- Provider integrations are isolated behind service boundaries so OpenAI, Claude, Gemini, Stripe, Razorpay, Resend, and MSG91 can evolve independently.
-- UI routes are organized by user workflow: auth, student, mentor, instructor, admin.
+- DPDP is one learning track, not the architecture boundary.
+- Multi-tenancy is organization scoped.
+- Authorization belongs in database policies and server-side guards, not client-only checks.
+- Provider integrations are isolated behind service and feature modules.
+- Feature-first folders remain the default organization model.
 
-## Feature Boundaries
+## Runtime Layers
 
-- `features/auth`: session, onboarding, role claims, organization switching.
-- `features/organizations`: tenants, memberships, invitations, enterprise settings.
-- `features/learning-tracks`: domain registry and track taxonomy.
-- `features/courses`: course authoring, modules, lessons, enrollment.
-- `features/assessments`: question banks, attempts, scoring, certificates.
-- `features/ai`: provider routing, generation, feedback, remediation.
-- `features/billing`: Stripe and Razorpay subscriptions, invoices, entitlements.
-- `features/users`: profile, learner progress, mentor assignment.
+- `app`: Next.js App Router entrypoints, route handlers, and app-level boundaries.
+- `features`: domain-owned application logic.
+- `services`: integration clients and cross-domain service contracts.
+- `lib`: shared infrastructure utilities.
+- `config`: environment and runtime configuration.
+- `database`: migrations and database documentation.
+- `types`: shared TypeScript contracts.
 
-## Data Model
+## Operational Endpoints
 
-The first migration creates:
-
-- organizations
-- organization_members
-- learning_tracks
-- courses
-- course_modules
-- lessons
-- enrollments
-- assessments
-- assessment_questions
-- assessment_attempts
-- certificates
-- ai_interactions
-
-All public tables enable RLS. Policies use membership checks, not user-editable metadata.
-
+- `/api/health`: process liveness.
+- `/api/ready`: deploy readiness and required environment checks.
+- `/api/version`: deployed version and commit metadata.
