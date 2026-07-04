@@ -30,12 +30,30 @@ npm run dev
 ## Validation
 
 ```bash
+npm run db:check
 npm run lint
 npm run typecheck
 npm run format
 npm run test
 npm run build
 ```
+
+## Phase 0 Database Readiness
+
+The frozen database contract is reconciled forward under ADR-001. The existing SQL migration is quarantined historical evidence, not an executable baseline. No production schema migration or seed is approved yet.
+
+```bash
+# Static checks: no database, Docker, credentials, or network required
+npm run db:check
+
+# Optional isolated local Supabase readiness
+npm run db:local:check
+npm run db:local:start
+npm run db:local:validate
+npm run db:local:stop
+```
+
+The local harness refuses hosted project links, `DATABASE_URL`, Supabase access tokens and database passwords. It never connects to the developer PostgreSQL database named `dpdp`. See the [Phase 0 reconciliation report](docs/32-phase-0-database-reconciliation.md) and [environment setup](docs/34-supabase-environment-setup.md).
 
 ## Documentation
 
@@ -78,6 +96,15 @@ npm run build
 - [Database security matrix](docs/28-database-security-matrix.md)
 - [Database performance strategy](docs/29-database-performance-strategy.md)
 - [Database open decisions](docs/30-database-open-decisions.md)
+
+### Phase 0 Database Readiness
+
+- [ADR-001: forward reconcile database history](docs/31-adr-001-forward-reconcile-database-history.md)
+- [Phase 0 reconciliation report](docs/32-phase-0-database-reconciliation.md)
+- [Database migration test harness](docs/33-database-test-harness.md)
+- [Supabase environment setup](docs/34-supabase-environment-setup.md)
+- [RLS test strategy](docs/35-rls-test-strategy.md)
+- [Seed validation strategy](docs/36-seed-validation-strategy.md)
 
 ### Engineering Standards
 

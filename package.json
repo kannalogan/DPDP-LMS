@@ -19,7 +19,15 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "e2e": "playwright test",
-    "ci": "npm run lint && npm run typecheck && npm run format && npm run test && npm run build",
+    "db:check": "sh scripts/database/check-all.sh",
+    "db:check:contract": "sh scripts/database/check-contract.sh",
+    "db:check:migrations": "sh scripts/database/check-migrations.sh",
+    "db:local:check": "sh scripts/database/local-supabase.sh check",
+    "db:local:start": "sh scripts/database/local-supabase.sh start",
+    "db:local:status": "sh scripts/database/local-supabase.sh status",
+    "db:local:validate": "sh scripts/database/validate-local.sh",
+    "db:local:stop": "sh scripts/database/local-supabase.sh stop",
+    "ci": "npm run db:check && npm run lint && npm run typecheck && npm run format && npm run test && npm run build",
     "prepare": "husky"
   },
   "lint-staged": {

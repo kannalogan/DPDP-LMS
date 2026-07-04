@@ -1,0 +1,2 @@
+path	sha256	status	contract_disposition
+database/migrations/0001_core_learning_platform.sql	cbbebb5e384f90f6f3370bde64960a466b3e4df0503771764ee1df867ffeef5c	quarantined	ADR-001 preserve; never replay from Phase 0 harness
