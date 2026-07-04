@@ -40,7 +40,19 @@ export function getEnv(): AppEnv {
 }
 
 export function getPublicEnv() {
-  const env = getEnv();
+  const env = envSchema
+    .pick({
+      NEXT_PUBLIC_APP_URL: true,
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: true,
+      NEXT_PUBLIC_SUPABASE_URL: true,
+      NODE_ENV: true
+    })
+    .parse({
+      NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+      NODE_ENV: process.env.NODE_ENV
+    });
 
   return {
     appUrl: env.NEXT_PUBLIC_APP_URL,

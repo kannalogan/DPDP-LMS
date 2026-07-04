@@ -55,6 +55,14 @@ npm run db:local:stop
 
 The local harness refuses hosted project links, `DATABASE_URL`, Supabase access tokens and database passwords. It never connects to the developer PostgreSQL database named `dpdp`. See the [Phase 0 reconciliation report](docs/32-phase-0-database-reconciliation.md) and [environment setup](docs/34-supabase-environment-setup.md).
 
+## Identity Platform
+
+Prompt #008 implements Supabase email/password authentication, verification and recovery, profiles/preferences, private avatar uploads, organizations and invitation acceptance, tenant switching, scoped RBAC, middleware session refresh, server permission checks and identity audit/session evidence.
+
+Primary routes: `/auth/login`, `/auth/register`, `/auth/forgot-password`, `/auth/reset-password`, `/invite/[token]`, `/account/profile`, and `/account/organizations`.
+
+See [Identity Platform implementation](docs/40-identity-platform-implementation.md). No student, mentor, administrator or LMS dashboard is included.
+
 ## Documentation
 
 ### Product And Data Architecture
@@ -107,6 +115,8 @@ The local harness refuses hosted project links, `DATABASE_URL`, Supabase access 
 - [Seed validation strategy](docs/36-seed-validation-strategy.md)
 - [ADR-002: trust-foundation reconciliation wave](docs/37-adr-002-trust-foundation-wave.md)
 - [Trust-foundation implementation status](docs/38-trust-foundation-implementation.md)
+- [ADR-003: identity and RBAC bootstrap](docs/39-adr-003-identity-rbac-bootstrap.md)
+- [Identity Platform implementation](docs/40-identity-platform-implementation.md)
 
 ### Engineering Standards
 

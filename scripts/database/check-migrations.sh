@@ -55,8 +55,14 @@ find database/migrations supabase/migrations -type f -name '*.sql' | sort | whil
     grep -Eq '^-- SYRA-RLS: (S[0-9]|not-exposed).+' "$migration" || fail "$migration creates a table without explicit RLS class"
   fi
 
-  if grep -Eiq '^[[:space:]]*(insert[[:space:]]+into|update|delete[[:space:]]+from)[[:space:]]+(public\.)?(learning_tracks|roles|permissions|profiles|organizations)([^[:alnum:]_]|$)' "$migration"; then
-    fail "$migration contains seed-like DML; seeds must be separate reviewed artifacts"
+  if grep -Eq '^-- SYRA-SEED: deployment-reference$' "$migration"; then
+    grep -q '^-- SYRA-REFERENCE-DATA-BEGIN$' "$migration" || fail "$migration lacks reference-data boundary"
+    grep -q '^-- SYRA-REFERENCE-DATA-END$' "$migration" || fail "$migration lacks reference-data boundary"
+    if sed -n '/^-- SYRA-REFERENCE-DATA-BEGIN$/,/^-- SYRA-REFERENCE-DATA-END$/p' "$migration" | grep -Eiq '^[[:space:]]*insert[[:space:]]+into[[:space:]]+(public\.)?(learning_tracks|profiles|organizations|organization_members|organization_invitations)([^[:alnum:]_]|$)'; then
+      fail "$migration contains tenant, user, or business seed data"
+    fi
+  elif grep -Eiq '^[[:space:]]*(insert[[:space:]]+into|update|delete[[:space:]]+from)[[:space:]]+(public\.)?(learning_tracks|roles|permissions|profiles|organizations)([^[:alnum:]_]|$)' "$migration"; then
+    fail "$migration contains unapproved seed-like DML"
   fi
 
   immutable_tables=$(awk -F '|' '/^\| `[^`]+`/ && $7 ~ /A2/ { name=$2; gsub(/[ `]/, "", name); print name }' docs/23-master-table-catalog.md)
