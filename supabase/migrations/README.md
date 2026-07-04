@@ -1,5 +1,5 @@
-# Migration Staging Area
+# Supabase Migrations
 
-No executable migration is approved in Prompt #006.
+`20260704000100_trust_foundation.sql` is the first approved forward reconciliation wave. It creates only the 11 objects authorized by ADR-002.
 
-Do not copy the quarantined legacy migration here. Prompt #007 may add an implementation plan and test-only reconciliation artifacts only after ADR-001 environment inventory exit criteria are met.
+Do not copy the quarantined legacy migration here. Never edit an applied migration; later changes use a new contract-referenced forward migration.

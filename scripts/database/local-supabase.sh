@@ -57,7 +57,12 @@ case "${1:-check}" in
   stop)
     run_cli stop
     ;;
+  reset)
+    [ "${SYRA_CONFIRM_LOCAL_RESET:-}" = "syra-local" ] || fail "set SYRA_CONFIRM_LOCAL_RESET=syra-local to reset only this isolated stack"
+    check_prerequisites
+    run_cli db reset --local
+    ;;
   *)
-    fail "usage: $0 [check|start|status|stop]"
+    fail "usage: $0 [check|start|status|stop|reset]"
     ;;
 esac

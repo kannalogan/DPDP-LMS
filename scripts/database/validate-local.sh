@@ -5,7 +5,16 @@ ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
 cd "$ROOT"
 
 "$ROOT/scripts/database/check-all.sh"
-"$ROOT/scripts/database/local-supabase.sh" status >/dev/null
+
+if ! "$ROOT/scripts/database/local-supabase.sh" check; then
+  printf 'SKIPPED: local database runtime validation requires an isolated Supabase CLI stack and Docker. Static checks passed; runtime checks did not run.\n' >&2
+  exit 2
+fi
+
+if ! "$ROOT/scripts/database/local-supabase.sh" status >/dev/null 2>&1; then
+  printf 'SKIPPED: local Supabase stack is not running. Run npm run db:local:start, then retry.\n' >&2
+  exit 2
+fi
 
 if [ -x node_modules/.bin/supabase ]; then
   CLI="$ROOT/node_modules/.bin/supabase"
@@ -22,6 +31,7 @@ if [ -f supabase/.temp/project-ref ] || [ -n "${SUPABASE_ACCESS_TOKEN:-}" ] || [
 fi
 
 unset SUPABASE_ACCESS_TOKEN SUPABASE_DB_PASSWORD DATABASE_URL
+SUPABASE_TELEMETRY_DISABLED=1 "$CLI" migration up --local
 SUPABASE_TELEMETRY_DISABLED=1 "$CLI" db lint --local --schema public --level warning --fail-on error
 
 if find supabase/tests -type f \( -name '*.sql' -o -name '*.pg' \) | grep -q .; then

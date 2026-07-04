@@ -24,8 +24,11 @@ tail -n +2 "$INVENTORY" | while IFS="$(printf '\t')" read -r path expected statu
   [ -n "$path" ] || continue
   [ -f "$path" ] || fail "inventory path missing: $path"
   actual=$(hash_file "$path")
-  [ "$actual" = "$expected" ] || fail "quarantined asset changed: $path"
-  [ "$status" = "quarantined" ] || fail "unsupported inventory status for $path: $status"
+  [ "$actual" = "$expected" ] || fail "inventoried migration changed: $path"
+  case "$status" in
+    quarantined | active) ;;
+    *) fail "unsupported inventory status for $path: $status" ;;
+  esac
   [ -n "$disposition" ] || fail "missing disposition for $path"
 done
 
@@ -33,6 +36,8 @@ find database/migrations supabase/migrations -type f -name '*.sql' | sort | whil
   if awk -F '\t' -v path="$migration" 'NR > 1 && $1 == path && $3 == "quarantined" { found=1 } END { exit !found }' "$INVENTORY"; then
     continue
   fi
+
+  awk -F '\t' -v path="$migration" 'NR > 1 && $1 == path && $3 == "active" { found=1 } END { exit !found }' "$INVENTORY" || fail "$migration is not registered as active"
 
   grep -Eq '^-- SYRA-CONTRACT: docs/(2[1-9]|30)-' "$migration" || fail "$migration lacks docs/21-30 contract reference"
   grep -Eq '^-- SYRA-ADR: (ADR-[0-9]{3}|none-additive)$' "$migration" || fail "$migration lacks valid ADR declaration"
@@ -64,4 +69,4 @@ done
 
 [ ! -f supabase/seed.sql ] || fail "supabase/seed.sql is not approved in Phase 0"
 
-printf 'migration policy check: ok (legacy checksum pinned; no unapproved migrations or seeds)\n'
+printf 'migration policy check: ok (legacy and active checksums pinned; no unapproved migrations or seeds)\n'

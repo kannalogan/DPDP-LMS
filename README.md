@@ -40,7 +40,7 @@ npm run build
 
 ## Phase 0 Database Readiness
 
-The frozen database contract is reconciled forward under ADR-001. The existing SQL migration is quarantined historical evidence, not an executable baseline. No production schema migration or seed is approved yet.
+The frozen database contract is reconciled forward under ADR-001. The existing SQL migration remains quarantined historical evidence. Prompt #007 adds the first executable wave: 11 deny-by-default trust-foundation tables under ADR-002, with no business seed data or final auth policies.
 
 ```bash
 # Static checks: no database, Docker, credentials, or network required
@@ -49,7 +49,7 @@ npm run db:check
 # Optional isolated local Supabase readiness
 npm run db:local:check
 npm run db:local:start
-npm run db:local:validate
+npm run db:validate
 npm run db:local:stop
 ```
 
@@ -105,6 +105,8 @@ The local harness refuses hosted project links, `DATABASE_URL`, Supabase access 
 - [Supabase environment setup](docs/34-supabase-environment-setup.md)
 - [RLS test strategy](docs/35-rls-test-strategy.md)
 - [Seed validation strategy](docs/36-seed-validation-strategy.md)
+- [ADR-002: trust-foundation reconciliation wave](docs/37-adr-002-trust-foundation-wave.md)
+- [Trust-foundation implementation status](docs/38-trust-foundation-implementation.md)
 
 ### Engineering Standards
 

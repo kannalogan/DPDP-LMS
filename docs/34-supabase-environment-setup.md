@@ -17,9 +17,14 @@ Never reuse project references, database passwords, service keys, webhook secret
 3. Run `npm run db:local:check` and resolve prerequisite failures.
 4. Run `npm run db:local:start` to start only the stack defined by `supabase/config.toml`.
 5. Use CLI-emitted local URLs and keys only in an ignored `.env.local`.
-6. Stop without deleting volumes using `npm run db:local:stop`.
+6. Run `npm run db:validate` to apply pending migrations, lint and execute pgTAP tests.
+7. Stop without deleting volumes using `npm run db:local:stop`.
 
 The harness refuses to start or validate when `supabase/.temp/project-ref` exists or remote credential variables are present. It does not inspect or connect to the separately installed PostgreSQL database named `dpdp`.
+
+If Docker or the stable Supabase CLI is unavailable, run `npm run db:check` for complete static validation. Runtime commands print `SKIPPED`, exit nonzero and do not claim the migration ran. Install prerequisites later from the official [Supabase CLI guide](https://supabase.com/docs/guides/local-development/cli/getting-started); installation is never automatic.
+
+Reset is deliberately separate from validation. Only the literal command `SYRA_CONFIRM_LOCAL_RESET=syra-local npm run db:reset-local` may reset the isolated CLI database. It still refuses hosted links and credential-bearing environments.
 
 ## Staging Setup
 

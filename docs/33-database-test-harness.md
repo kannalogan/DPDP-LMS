@@ -14,7 +14,10 @@ The Phase 0 harness validates repository contracts and prepares an isolated loca
 | `npm run db:local:check`      | Check Docker, CLI, config and remote-link isolation         | No database connection |
 | `npm run db:local:start`      | Start the repository's isolated Supabase stack              | Local containers only  |
 | `npm run db:local:status`     | Show local stack status                                     | Local containers only  |
-| `npm run db:local:validate`   | Run static gates, local DB lint and pgTAP discovery         | Local Supabase only    |
+| `npm run db:validate`         | Apply pending local migrations, DB lint and pgTAP tests     | Local Supabase only    |
+| `npm run db:lint`             | Run PostgreSQL function/schema lint                         | Local Supabase only    |
+| `npm run db:types`            | Blocked placeholder until foundation runtime validation     | No connection; exits 2 |
+| `npm run db:reset-local`      | Confirmed reset of only the isolated local stack            | Local Supabase only    |
 | `npm run db:local:stop`       | Stop this repository's local stack without deleting volumes | Local containers only  |
 
 The scripts require an installed stable Supabase CLI and Docker-compatible runtime. They do not install dependencies, log in, link projects, accept a database URL or run `db push`.
@@ -45,16 +48,16 @@ Rules enforced statically:
 
 ## Runtime Validation Sequence
 
-After Prompt #007 introduces an approved test migration and pgTAP tests:
+For Prompt #007 and later approved migrations:
 
 1. Start the isolated stack with `npm run db:local:start`.
 2. Run static gates with `npm run db:check`.
-3. Rebuild only the isolated local Supabase database from approved migrations.
+3. Apply pending migrations with `supabase migration up --local`.
 4. Run `supabase db lint --local --schema public --level warning --fail-on error`.
 5. Run `supabase test db --local` for pgTAP contract, RLS and immutability tests.
 6. Generate a schema-only diff and require no unexplained output.
 7. Generate TypeScript database types and compare them with the committed artifact.
 
-Steps 3, 6 and 7 remain disabled in Phase 0 because there is no approved baseline migration or generated-type target.
+Schema-diff and generated-type gates remain disabled until the trust-foundation runtime suite passes. A destructive local rebuild is separate and requires `SYRA_CONFIRM_LOCAL_RESET=syra-local npm run db:reset-local`.
 
 Supabase documents the local stack, `db lint`, pgTAP-backed `test db`, and migration history behavior in its [CLI guide](https://supabase.com/docs/guides/local-development/cli/getting-started), [testing guidance](https://supabase.com/docs/guides/local-development/cli/testing-and-linting), and [migration guide](https://supabase.com/docs/guides/deployment/database-migrations).
