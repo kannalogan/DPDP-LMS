@@ -69,6 +69,12 @@ Prompt #009 adds SYRA's reusable design tokens, light/dark/system themes, access
 
 Import generic primitives from `@/shared/ui`, domain-neutral presentation components from `@/shared/components`, layouts from `@/shared/layouts`, and shell composition from `@/app-shell`. See the [Enterprise UI Platform guide](docs/41-enterprise-ui-platform.md). This foundation contains no dashboards or LMS pages.
 
+## Student Workspace
+
+Prompt #010 adds the protected `/student` learning home, library, progress, timeline, goals, calendar, notifications, bookmarks, downloads, achievements, activity, and search experiences. The workspace uses real identity, profile, organization, and RBAC context. Learning-domain repositories currently return explicit unavailable and empty states because their approved database tables and policies have not yet been migrated; no demo learning data is embedded.
+
+See the [Student Workspace implementation](docs/42-student-workspace.md).
+
 ## Documentation
 
 ### Product And Data Architecture
@@ -124,6 +130,7 @@ Import generic primitives from `@/shared/ui`, domain-neutral presentation compon
 - [ADR-003: identity and RBAC bootstrap](docs/39-adr-003-identity-rbac-bootstrap.md)
 - [Identity Platform implementation](docs/40-identity-platform-implementation.md)
 - [Enterprise UI Platform](docs/41-enterprise-ui-platform.md)
+- [Student Workspace](docs/42-student-workspace.md)
 
 ### Engineering Standards
 
