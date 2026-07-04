@@ -1,26 +1,6 @@
 @import "tailwindcss";
-
-:root {
-  --background: 210 40% 98%;
-  --foreground: 222 47% 11%;
-  --surface: 0 0% 100%;
-  --border: 214 32% 91%;
-  --primary: 221 83% 53%;
-  --primary-foreground: 210 40% 98%;
-  --muted: 210 40% 96%;
-  --muted-foreground: 215 16% 47%;
-}
-
-.dark {
-  --background: 222 47% 7%;
-  --foreground: 210 40% 98%;
-  --surface: 222 47% 10%;
-  --border: 217 33% 18%;
-  --primary: 189 94% 43%;
-  --primary-foreground: 222 47% 7%;
-  --muted: 217 33% 14%;
-  --muted-foreground: 215 20% 65%;
-}
+@import "../shared/tokens/tokens.css";
+@import "../shared/theme/components.css";
 
 * {
   border-color: hsl(var(--border));

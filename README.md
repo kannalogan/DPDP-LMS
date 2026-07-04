@@ -63,6 +63,12 @@ Primary routes: `/auth/login`, `/auth/register`, `/auth/forgot-password`, `/auth
 
 See [Identity Platform implementation](docs/40-identity-platform-implementation.md). No student, mentor, administrator or LMS dashboard is included.
 
+## Enterprise UI Platform
+
+Prompt #009 adds SYRA's reusable design tokens, light/dark/system themes, accessible UI primitives, application shell, motion layer, responsive page templates, and AI, learning-content, and enterprise presentation components. Protected account routes use the shell without changing the frozen identity, RBAC, or organization architecture.
+
+Import generic primitives from `@/shared/ui`, domain-neutral presentation components from `@/shared/components`, layouts from `@/shared/layouts`, and shell composition from `@/app-shell`. See the [Enterprise UI Platform guide](docs/41-enterprise-ui-platform.md). This foundation contains no dashboards or LMS pages.
+
 ## Documentation
 
 ### Product And Data Architecture
@@ -117,6 +123,7 @@ See [Identity Platform implementation](docs/40-identity-platform-implementation.
 - [Trust-foundation implementation status](docs/38-trust-foundation-implementation.md)
 - [ADR-003: identity and RBAC bootstrap](docs/39-adr-003-identity-rbac-bootstrap.md)
 - [Identity Platform implementation](docs/40-identity-platform-implementation.md)
+- [Enterprise UI Platform](docs/41-enterprise-ui-platform.md)
 
 ### Engineering Standards
 

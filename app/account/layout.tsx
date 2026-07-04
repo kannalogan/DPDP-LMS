@@ -1,11 +1,12 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
+import { AccountApplicationShell } from "@/app-shell/account-application-shell";
 import { logout } from "@/features/auth/actions";
 import { ProtectedRoute } from "@/features/auth/components/protected-route";
 import { OrganizationSwitcher } from "@/features/organizations/components/organization-switcher";
 import { listOrganizations } from "@/features/organizations/server";
 import { resolveIdentityContext } from "@/features/session/server";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/shared/theme/theme-toggle";
 
 export default async function AccountLayout({ children }: { children: ReactNode }) {
   const [context, organizations] = await Promise.all([
@@ -14,30 +15,26 @@ export default async function AccountLayout({ children }: { children: ReactNode 
   ]);
   return (
     <ProtectedRoute>
-      <div className="account-shell">
-        <header className="account-header">
-          <Link className="identity-brand" href="/account/profile">
-            <span aria-hidden="true" className="identity-mark">
-              S
-            </span>
-            <span>SYRA</span>
-          </Link>
-          <nav aria-label="Account navigation">
-            <Link href="/account/profile">Profile</Link>
-            <Link href="/account/organizations">Organizations</Link>
-          </nav>
+      <AccountApplicationShell
+        userMenu={
+          <div className="syra-user-actions">
+            <ThemeToggle />
+            <form action={logout}>
+              <Button type="submit" variant="secondary">
+                Sign out
+              </Button>
+            </form>
+          </div>
+        }
+        workspace={
           <OrganizationSwitcher
             currentId={context?.organizationId ?? null}
             organizations={organizations}
           />
-          <form action={logout}>
-            <Button className="secondary-button" type="submit">
-              Sign out
-            </Button>
-          </form>
-        </header>
-        <main className="account-content">{children}</main>
-      </div>
+        }
+      >
+        {children}
+      </AccountApplicationShell>
     </ProtectedRoute>
   );
 }

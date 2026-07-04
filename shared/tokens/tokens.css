@@ -1,0 +1,68 @@
+:root {
+  color-scheme: light;
+  --color-canvas: 210 25% 98%;
+  --color-surface: 0 0% 100%;
+  --color-surface-raised: 0 0% 100%;
+  --color-foreground: 222 32% 10%;
+  --color-muted: 210 20% 95%;
+  --color-muted-foreground: 215 12% 43%;
+  --color-border: 214 20% 88%;
+  --color-border-strong: 215 16% 74%;
+  --color-brand: 158 73% 32%;
+  --color-brand-foreground: 0 0% 100%;
+  --color-accent: 221 83% 53%;
+  --color-accent-foreground: 0 0% 100%;
+  --color-success: 158 64% 32%;
+  --color-warning: 38 92% 42%;
+  --color-danger: 4 72% 45%;
+  --color-info: 209 90% 48%;
+  --background: var(--color-canvas);
+  --foreground: var(--color-foreground);
+  --surface: var(--color-surface);
+  --border: var(--color-border);
+  --primary: var(--color-brand);
+  --primary-foreground: var(--color-brand-foreground);
+  --muted: var(--color-muted);
+  --muted-foreground: var(--color-muted-foreground);
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 2.5rem;
+  --space-6: 3rem;
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
+  --shadow-md: 0 12px 28px -18px rgb(15 23 42 / 0.35);
+  --shadow-lg: 0 26px 60px -30px rgb(15 23 42 / 0.4);
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --duration-slow: 320ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --opacity-disabled: 0.48;
+  --blur-glass: 16px;
+  --glass-background: 0 0% 100% / 0.78;
+}
+
+.dark {
+  color-scheme: dark;
+  --color-canvas: 220 18% 7%;
+  --color-surface: 220 16% 10%;
+  --color-surface-raised: 220 15% 13%;
+  --color-foreground: 210 20% 96%;
+  --color-muted: 220 14% 15%;
+  --color-muted-foreground: 215 14% 65%;
+  --color-border: 220 13% 20%;
+  --color-border-strong: 218 12% 30%;
+  --color-brand: 158 63% 46%;
+  --color-brand-foreground: 220 18% 7%;
+  --color-accent: 210 90% 62%;
+  --color-accent-foreground: 220 18% 7%;
+  --color-success: 158 60% 46%;
+  --color-warning: 40 92% 58%;
+  --color-danger: 5 82% 64%;
+  --color-info: 207 92% 65%;
+  --glass-background: 220 16% 10% / 0.78;
+}
