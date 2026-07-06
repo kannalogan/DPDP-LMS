@@ -8,7 +8,7 @@ The protected `/student` workspace includes home, my learning, progress, timelin
 
 ## Data Boundary
 
-`features/student/types.ts` defines the student read-model contract. `StudentWorkspaceRepository` is the only learning-data dependency available to server composition. The current `UnavailableStudentWorkspaceRepository` returns explicit unavailable capability metadata and empty collections because the learning-domain tables and RLS policies approved in the master database contract have not yet been migrated.
+`features/student/types.ts` defines the student read-model contract. `StudentWorkspaceRepository` is the only learning-data dependency available to server composition. Prompt #011 replaces the original readiness adapter with `SupabaseStudentWorkspaceRepository`; see `docs/44-learning-domain-implementation.md` for its migration, RLS, and partial-capability boundaries.
 
 This is deliberate:
 
@@ -49,4 +49,4 @@ Pages use semantic headings, native links and controls, explicit labels, ARIA cu
 
 ## Backend Enablement
 
-Replacing the unavailable adapter requires the approved learning-domain migration and RLS wave first. The production adapter must read only authorized projections for `courses`, `course_versions`, `enrollments`, `lesson_progress`, `learning_activity_events`, `learner_bookmarks`, `study_plans`, `notifications`, `certificates`, `badges`, and analytics facts. Any contract deviation requires an ADR before implementation.
+The production adapter reads only the authorized projections included in the Prompt #011 wave. `learning_activity_events`, notifications, certificates, badges, and analytics facts remain explicit empty capabilities until their separately approved migrations. Any contract deviation requires an ADR before implementation.

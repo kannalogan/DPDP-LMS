@@ -1,57 +1,57 @@
-"use client";
-
-import { useMemo, useState } from "react";
-import type { StudentBookmark, StudentCertificate, StudentCourse } from "@/features/student/types";
-import { SearchInput } from "@/shared/ui/forms";
-import { StudentCourseCard } from "@/features/student/components/student-cards";
+import Link from "next/link";
+import type { Route } from "next";
+import type { StudentLearningSearchResult } from "@/features/student/types";
 import { StudentEmpty } from "@/features/student/components/workspace-ui";
+import { Button } from "@/shared/ui/button";
+import { SearchInput } from "@/shared/ui/forms";
+import { Badge } from "@/shared/ui/feedback";
+import { Card } from "@/shared/ui/data-display";
 
 export function StudentSearch({
-  bookmarks,
-  certificates,
-  courses
+  results,
+  query
 }: {
-  bookmarks: StudentBookmark[];
-  certificates: StudentCertificate[];
-  courses: StudentCourse[];
+  results: StudentLearningSearchResult[];
+  query: string;
 }) {
-  const [query, setQuery] = useState("");
-  const normalized = query.trim().toLocaleLowerCase();
-  const results = useMemo(
-    () => ({
-      bookmarks: bookmarks.filter((item) => item.label.toLocaleLowerCase().includes(normalized)),
-      certificates: certificates.filter((item) =>
-        item.courseTitle.toLocaleLowerCase().includes(normalized)
-      ),
-      courses: courses.filter((item) =>
-        `${item.title} ${item.description}`.toLocaleLowerCase().includes(normalized)
-      )
-    }),
-    [bookmarks, certificates, courses, normalized]
-  );
-  const count = results.bookmarks.length + results.certificates.length + results.courses.length;
-
   return (
     <div className="student-search-view">
-      <SearchInput
-        aria-label="Search courses, lessons, resources, bookmarks, and certificates"
-        onChange={(event) => setQuery(event.target.value)}
-        placeholder="Search your learning"
-        value={query}
-      />
-      {!count ? (
+      <form action="/student/search" className="student-search-form" method="get" role="search">
+        <SearchInput
+          aria-label="Search courses, lessons, resources, bookmarks, and certificates"
+          defaultValue={query}
+          minLength={2}
+          name="q"
+          placeholder="Search your learning"
+        />
+        <Button type="submit">Search</Button>
+      </form>
+      {!results.length ? (
         <StudentEmpty
           description={
-            normalized
-              ? "No learning items match your search."
-              : "Your searchable learning library is empty."
+            query
+              ? "No authorized learning items match your search."
+              : "Enter at least two characters to search the published catalog."
           }
           title="No results"
         />
       ) : (
         <div className="student-card-grid">
-          {results.courses.map((course) => (
-            <StudentCourseCard course={course} key={course.courseId} />
+          {results.map((result) => (
+            <Card className="student-search-result" key={`${result.type}-${result.resultId}`}>
+              <div className="student-card-heading">
+                <Badge>{result.type}</Badge>
+              </div>
+              <h2>{result.title}</h2>
+              <p>{result.description}</p>
+              {result.courseId ? (
+                <Button asChild variant="secondary">
+                  <Link href={`/student/learning?course=${result.courseId}` as Route}>
+                    View in learning
+                  </Link>
+                </Button>
+              ) : null}
+            </Card>
           ))}
         </div>
       )}

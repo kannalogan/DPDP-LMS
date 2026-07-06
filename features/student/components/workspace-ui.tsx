@@ -86,7 +86,11 @@ export function StudentServiceNotice({
     <section className="student-service-notice" role="status">
       <AlertTriangle aria-hidden="true" />
       <div>
-        <strong>Learning service is being prepared</strong>
+        <strong>
+          {status === "partial"
+            ? "Some workspace data is unavailable"
+            : "Learning service is being prepared"}
+        </strong>
         <p>{reason}</p>
       </div>
     </section>

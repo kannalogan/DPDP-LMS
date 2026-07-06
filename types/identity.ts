@@ -11,6 +11,7 @@ export type PermissionKey =
   | "authorization.role.read"
   | "authorization.role.manage"
   | "authorization.assignment.manage"
+  | "learning.catalog.manage"
   | "platform.access";
 
 export interface ActionResult {

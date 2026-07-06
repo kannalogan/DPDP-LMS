@@ -1,4 +1,4 @@
-export type StudentDataStatus = "available" | "unavailable";
+export type StudentDataStatus = "available" | "partial" | "unavailable";
 export type LearningStatus = "not_started" | "in_progress" | "completed" | "paused";
 export type TimelineEventType = "lesson" | "assessment" | "certificate" | "reminder";
 export type NotificationType =
@@ -50,7 +50,7 @@ export interface StudentGoal {
   label: string;
   period: "today" | "week" | "month";
   target: number;
-  unit: "lessons" | "minutes" | "courses";
+  unit: "lessons" | "minutes" | "courses" | "plans";
 }
 
 export interface StudentNotification {
@@ -98,6 +98,14 @@ export interface StudentRecommendation {
   title: string;
 }
 
+export interface StudentLearningSearchResult {
+  courseId: string | null;
+  description: string;
+  resultId: string;
+  title: string;
+  type: "course" | "lesson" | "resource" | "bookmark";
+}
+
 export interface StudentProgress {
   assessmentProgress: number | null;
   completion: number | null;
@@ -126,6 +134,27 @@ export interface StudentWorkspaceData {
 }
 
 export interface StudentWorkspaceRepository {
+  getStudentBookmarks(profileId: string, organizationId: string): Promise<StudentBookmark[]>;
+  getStudentCourses(profileId: string, organizationId: string): Promise<StudentCourse[]>;
+  getStudentGoals(profileId: string, organizationId: string): Promise<StudentGoal[]>;
+  getStudentNotificationsView(
+    profileId: string,
+    organizationId: string
+  ): Promise<{
+    items: StudentNotification[];
+    unavailableReason: string;
+  }>;
+  getStudentProgress(profileId: string, organizationId: string): Promise<StudentProgress>;
+  getStudentTimeline(profileId: string, organizationId: string): Promise<StudentActivity[]>;
+  searchStudentLearning(
+    profileId: string,
+    organizationId: string,
+    query: string
+  ): Promise<StudentLearningSearchResult[]>;
+  getStudentWorkspaceSummary(
+    profileId: string,
+    organizationId: string
+  ): Promise<Omit<StudentWorkspaceData, "permissionGranted" | "profile">>;
   getWorkspace(
     profileId: string,
     organizationId: string | null

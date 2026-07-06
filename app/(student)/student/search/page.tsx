@@ -4,10 +4,18 @@ import {
   StudentSearch,
   StudentServiceNotice
 } from "@/features/student/components";
-import { requireStudentWorkspace } from "@/features/student/server";
+import { requireStudentWorkspace, searchStudentLearning } from "@/features/student/server";
 
-export default async function SearchPage() {
-  const data = await requireStudentWorkspace();
+export default async function SearchPage({
+  searchParams
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const query = (await searchParams).q?.trim().slice(0, 120) ?? "";
+  const [data, results] = await Promise.all([
+    requireStudentWorkspace(),
+    query.length >= 2 ? searchStudentLearning(query) : Promise.resolve([])
+  ]);
   if (!data.permissionGranted) return <StudentPermissionError />;
   return (
     <div className="student-workspace">
@@ -17,11 +25,7 @@ export default async function SearchPage() {
         title="Search learning"
       />
       <StudentServiceNotice reason={data.unavailableReason} status={data.status} />
-      <StudentSearch
-        bookmarks={data.bookmarks}
-        certificates={data.certificates}
-        courses={data.courses}
-      />
+      <StudentSearch query={query} results={results} />
     </div>
   );
 }

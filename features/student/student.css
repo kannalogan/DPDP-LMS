@@ -229,6 +229,25 @@
   gap: 20px;
 }
 
+.student-search-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.student-search-result {
+  display: grid;
+  gap: 12px;
+}
+
+.student-search-result > p {
+  color: hsl(var(--color-muted-foreground));
+}
+
+.student-search-result .ui-button {
+  width: fit-content;
+}
+
 .student-library-toolbar {
   display: grid;
   grid-template-columns: minmax(220px, 1fr) 180px 180px auto;
@@ -310,6 +329,10 @@
 
   .student-library-toolbar {
     grid-template-columns: minmax(220px, 1fr) repeat(2, 160px);
+  }
+
+  .student-search-form {
+    grid-template-columns: 1fr;
   }
 
   .student-view-toggle {

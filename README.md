@@ -75,6 +75,12 @@ Prompt #010 adds the protected `/student` learning home, library, progress, time
 
 See the [Student Workspace implementation](docs/42-student-workspace.md).
 
+## Learning Domain
+
+Prompt #011 adds the canonical learning catalog, versioning, enrollment, progress, learner-save, and study-plan tables with forced RLS and published-version immutability. The Student Workspace now reads real Supabase-backed learning projections through server-only repositories. Notifications and later-domain sections retain explicit empty capability states until their approved migrations exist.
+
+No production business seed data is included. See the [Learning Domain implementation](docs/44-learning-domain-implementation.md) and [ADR-004](docs/43-adr-004-learning-wave-contract-reconciliation.md).
+
 ## Documentation
 
 ### Product And Data Architecture
@@ -131,6 +137,8 @@ See the [Student Workspace implementation](docs/42-student-workspace.md).
 - [Identity Platform implementation](docs/40-identity-platform-implementation.md)
 - [Enterprise UI Platform](docs/41-enterprise-ui-platform.md)
 - [Student Workspace](docs/42-student-workspace.md)
+- [ADR-004: Learning wave contract reconciliation](docs/43-adr-004-learning-wave-contract-reconciliation.md)
+- [Learning Domain implementation](docs/44-learning-domain-implementation.md)
 
 ### Engineering Standards
 
