@@ -29,6 +29,7 @@ import { StudentEmpty } from "@/features/student/components/workspace-ui";
 const navigation = [
   { href: "/student", icon: <Home />, label: "Home" },
   { href: "/student/learning", icon: <BookOpen />, label: "My learning" },
+  { href: "/student/courses", icon: <BookOpen />, label: "Courses" },
   { href: "/student/progress", icon: <Gauge />, label: "Progress" },
   { href: "/student/timeline", icon: <TimerReset />, label: "Timeline" },
   { href: "/student/goals", icon: <Flag />, label: "Goals" },

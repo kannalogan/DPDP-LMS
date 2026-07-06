@@ -16,6 +16,7 @@ const envSchema = z.object({
   RESEND_API_KEY: z.string().min(1).optional(),
   STRIPE_SECRET_KEY: z.string().min(1).optional(),
   STRIPE_WEBHOOK_SECRET: z.string().min(1).optional(),
+  SYRA_NOTE_ENCRYPTION_KEY: z.string().min(1).optional(),
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().min(1).optional(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
   VERCEL_ENV: z.enum(["development", "preview", "production"]).optional(),

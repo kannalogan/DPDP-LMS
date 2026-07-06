@@ -9,6 +9,7 @@ import { getStudentWorkspace } from "@/features/student/server";
 import { Button } from "@/shared/ui/button";
 import { ThemeToggle } from "@/shared/theme/theme-toggle";
 import "@/features/student/student.css";
+import "@/features/learning-delivery/delivery.css";
 
 export default async function StudentLayout({ children }: { children: ReactNode }) {
   const [data, organizations] = await Promise.all([getStudentWorkspace(), listOrganizations()]);

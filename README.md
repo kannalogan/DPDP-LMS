@@ -81,6 +81,12 @@ Prompt #011 adds the canonical learning catalog, versioning, enrollment, progres
 
 No production business seed data is included. See the [Learning Domain implementation](docs/44-learning-domain-implementation.md) and [ADR-004](docs/43-adr-004-learning-wave-contract-reconciliation.md).
 
+## Course And Lesson Delivery
+
+Prompt #012 adds the authenticated `/student/courses` catalog, course/module/lesson routes, typed server repositories, controlled progress RPCs, resource access, bookmarks, and AES-256-GCM private learner notes. The delivery wave is additive and contains no tables or business content seeds.
+
+Set the private server-only `SYRA_NOTE_ENCRYPTION_KEY` to a base64-encoded 32-byte value before enabling notes. Missing configuration fails closed. See the [delivery implementation](docs/46-course-lesson-delivery.md) and [ADR-005](docs/45-adr-005-delivery-routing-and-note-encryption.md).
+
 ## Documentation
 
 ### Product And Data Architecture
@@ -139,6 +145,8 @@ No production business seed data is included. See the [Learning Domain implement
 - [Student Workspace](docs/42-student-workspace.md)
 - [ADR-004: Learning wave contract reconciliation](docs/43-adr-004-learning-wave-contract-reconciliation.md)
 - [Learning Domain implementation](docs/44-learning-domain-implementation.md)
+- [ADR-005: Delivery routing and note encryption](docs/45-adr-005-delivery-routing-and-note-encryption.md)
+- [Course and Lesson Delivery](docs/46-course-lesson-delivery.md)
 
 ### Engineering Standards
 
