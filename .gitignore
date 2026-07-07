@@ -13,3 +13,4 @@ test-results
 .vercel
 supabase/.branches/
 supabase/.temp/
+.DS_Store
