@@ -161,6 +161,9 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [ADR-008: Mentor authorization model](docs/52-adr-008-mentor-authorization-model.md)
 - [Mentor Workspace](docs/53-mentor-workspace.md)
 - [Mentor migration notes](docs/54-mentor-migration-notes.md)
+- [ADR-009: Admin workspace operational extensions](docs/55-adr-009-admin-workspace-extensions.md)
+- [Admin Workspace](docs/56-admin-workspace.md)
+- [Admin migration notes](docs/57-admin-migration-notes.md)
 
 ### Engineering Standards
 

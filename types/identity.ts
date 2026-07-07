@@ -16,6 +16,7 @@ export type PermissionKey =
   | "certificate.template.manage"
   | "certificate.issue"
   | "mentor.workspace.manage"
+  | "admin.workspace.manage"
   | "platform.access";
 
 export interface ActionResult {
