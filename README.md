@@ -87,6 +87,12 @@ Prompt #012 adds the authenticated `/student/courses` catalog, course/module/les
 
 Set the private server-only `SYRA_NOTE_ENCRYPTION_KEY` to a base64-encoded 32-byte value before enabling notes. Missing configuration fails closed. See the [delivery implementation](docs/46-course-lesson-delivery.md) and [ADR-005](docs/45-adr-005-delivery-routing-and-note-encryption.md).
 
+## Enterprise Assessment Engine
+
+Prompt #013 adds the canonical assessment/question/rubric/attempt/evaluation foundation and protected `/student/assessments` delivery routes. Learner writes use controlled RPCs with ownership, enrollment-course, tenant, window, expiry, and immutable-submission checks. Answer keys remain service-only and no automatic or AI grading is implemented.
+
+See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [Assessment Engine implementation](docs/48-assessment-engine.md).
+
 ## Documentation
 
 ### Product And Data Architecture
@@ -147,6 +153,8 @@ Set the private server-only `SYRA_NOTE_ENCRYPTION_KEY` to a base64-encoded 32-by
 - [Learning Domain implementation](docs/44-learning-domain-implementation.md)
 - [ADR-005: Delivery routing and note encryption](docs/45-adr-005-delivery-routing-and-note-encryption.md)
 - [Course and Lesson Delivery](docs/46-course-lesson-delivery.md)
+- [ADR-006: Assessment contract reconciliation](docs/47-adr-006-assessment-contract-reconciliation.md)
+- [Enterprise Assessment Engine](docs/48-assessment-engine.md)
 
 ### Engineering Standards
 

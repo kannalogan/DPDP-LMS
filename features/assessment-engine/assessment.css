@@ -1,0 +1,417 @@
+.assessment-catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+
+.assessment-card,
+.assessment-details,
+.assessment-details main,
+.assessment-summary,
+.assessment-history,
+.assessment-review-layout,
+.assessment-review-panel,
+.assessment-result {
+  display: grid;
+  gap: 16px;
+}
+
+.assessment-card {
+  align-content: start;
+}
+
+.assessment-card > p,
+.assessment-details > header p,
+.assessment-details main section > p,
+.assessment-lock-state,
+.assessment-result > p {
+  color: hsl(var(--color-muted-foreground));
+}
+
+.assessment-card .ui-button {
+  width: fit-content;
+}
+
+.assessment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  color: hsl(var(--color-muted-foreground));
+  font-size: 0.875rem;
+}
+
+.assessment-meta span,
+.assessment-timer,
+.assessment-lock-state,
+.assessment-save-status,
+.assessment-submit-dialog p {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.assessment-meta svg,
+.assessment-lock-state svg,
+.assessment-save-status svg,
+.assessment-submit-dialog svg {
+  width: 17px;
+}
+
+.assessment-details > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid hsl(var(--color-border));
+}
+
+.assessment-details > header h1,
+.assessment-result h1 {
+  margin-top: 5px;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.assessment-details-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(270px, 320px);
+  gap: 32px;
+  align-items: start;
+}
+
+.assessment-details main section {
+  display: grid;
+  gap: 12px;
+}
+
+.assessment-details main ul {
+  display: grid;
+  gap: 8px;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.assessment-details aside {
+  position: sticky;
+  top: 20px;
+}
+
+.assessment-summary dl {
+  display: grid;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-md);
+  background: hsl(var(--color-border));
+}
+
+.assessment-summary dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px;
+  background: hsl(var(--color-surface));
+}
+
+.assessment-summary dt {
+  color: hsl(var(--color-muted-foreground));
+}
+
+.assessment-summary dd {
+  font-weight: 700;
+}
+
+.assessment-history li,
+.assessment-review-panel li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-sm);
+}
+
+.assessment-attempt-shell {
+  display: grid;
+  min-width: 0;
+  gap: 20px;
+}
+
+.assessment-toolbar {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid hsl(var(--color-border));
+}
+
+.assessment-toolbar > div {
+  display: grid;
+  gap: 3px;
+}
+
+.assessment-timer {
+  min-width: 112px;
+  justify-content: center;
+  padding: 9px 12px;
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-md);
+  font-variant-numeric: tabular-nums;
+  font-weight: 750;
+}
+
+.assessment-timer.is-urgent {
+  border-color: hsl(var(--color-danger) / 0.5);
+  color: hsl(var(--color-danger));
+}
+
+.assessment-attempt-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.assessment-attempt-layout > main,
+.assessment-sidebar {
+  min-width: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.assessment-sidebar {
+  position: sticky;
+  top: 20px;
+}
+
+.assessment-palette {
+  display: grid;
+  grid-template-columns: repeat(5, 36px);
+  gap: 7px;
+}
+
+.assessment-palette button {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-sm);
+  background: hsl(var(--color-surface));
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.assessment-palette button.is-answered,
+.assessment-legend i.is-answered {
+  border-color: hsl(var(--color-success));
+  background: hsl(var(--color-success) / 0.14);
+}
+
+.assessment-palette button.is-marked,
+.assessment-legend i.is-marked {
+  box-shadow: inset 0 -3px hsl(var(--color-warning));
+}
+
+.assessment-palette button[aria-current="step"] {
+  outline: 2px solid hsl(var(--color-brand));
+  outline-offset: 2px;
+}
+
+.assessment-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: hsl(var(--color-muted-foreground));
+  font-size: 0.75rem;
+}
+
+.assessment-legend span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.assessment-legend i {
+  width: 12px;
+  height: 12px;
+  display: block;
+  border: 1px solid hsl(var(--color-border));
+  border-radius: 2px;
+}
+
+.assessment-question {
+  min-height: 420px;
+  display: grid;
+  align-content: start;
+  gap: 22px;
+  padding: 24px;
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-md);
+  background: hsl(var(--color-surface));
+  content-visibility: auto;
+  contain-intrinsic-size: 600px;
+}
+
+.assessment-question > header,
+.assessment-question-actions,
+.assessment-attempt-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.assessment-question > header {
+  color: hsl(var(--color-muted-foreground));
+  font-size: 0.8125rem;
+}
+
+.assessment-question h1 {
+  font-size: 1.35rem;
+  line-height: 1.45;
+}
+
+.assessment-choices {
+  display: grid;
+  gap: 10px;
+}
+
+.assessment-choices .ui-choice {
+  min-height: 48px;
+  align-items: center;
+  padding: 11px 13px;
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-sm);
+}
+
+.assessment-ordering {
+  display: grid;
+  gap: 8px;
+}
+
+.assessment-ordering > div {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 11px;
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-sm);
+}
+
+.assessment-ordering svg {
+  width: 18px;
+  color: hsl(var(--color-muted-foreground));
+}
+
+.assessment-save-status {
+  min-height: 20px;
+  color: hsl(var(--color-muted-foreground));
+  font-size: 0.8rem;
+}
+
+.assessment-attempt-footer {
+  padding-top: 16px;
+  border-top: 1px solid hsl(var(--color-border));
+}
+
+.assessment-unsupported {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid hsl(var(--color-warning) / 0.4);
+  border-radius: var(--radius-md);
+  background: hsl(var(--color-warning) / 0.08);
+}
+
+.assessment-unsupported svg {
+  width: 24px;
+  color: hsl(var(--color-warning));
+}
+
+.assessment-result {
+  justify-items: start;
+  padding: 24px 0;
+}
+
+.assessment-result > svg {
+  width: 32px;
+  color: hsl(var(--color-brand));
+}
+
+.assessment-result-score {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 4px 10px;
+  align-items: center;
+}
+
+.assessment-result-score svg {
+  grid-row: 1 / 3;
+  width: 32px;
+  color: hsl(var(--color-success));
+}
+
+.assessment-result-score strong {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 960px) {
+  .assessment-details-layout,
+  .assessment-attempt-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .assessment-details aside,
+  .assessment-sidebar {
+    position: static;
+  }
+
+  .assessment-sidebar {
+    order: 2;
+  }
+
+  .assessment-palette {
+    grid-template-columns: repeat(auto-fill, 36px);
+  }
+}
+
+@media (max-width: 600px) {
+  .assessment-details > header,
+  .assessment-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .assessment-question {
+    min-height: 360px;
+    padding: 18px;
+  }
+
+  .assessment-question-actions .ui-button {
+    flex: 1 1 auto;
+  }
+
+  .assessment-history li,
+  .assessment-review-panel li {
+    grid-template-columns: 1fr auto;
+  }
+
+  .assessment-history li > :last-child,
+  .assessment-review-panel li > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .assessment-save-status .ui-spin {
+    animation: none;
+  }
+}
