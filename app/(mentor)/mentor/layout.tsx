@@ -6,6 +6,7 @@ import { ProtectedRoute } from "@/features/auth/components/protected-route";
 import { Button } from "@/shared/ui/button";
 import "@/features/student/student.css";
 import "@/features/mentor/mentor.css";
+import "@/features/course-authoring/authoring.css";
 
 const links = [
   ["/mentor/dashboard", "Dashboard"],
@@ -13,7 +14,8 @@ const links = [
   ["/mentor/cohorts", "Cohorts"],
   ["/mentor/reviews", "Reviews"],
   ["/mentor/tasks", "Tasks"],
-  ["/mentor/announcements", "Announcements"]
+  ["/mentor/announcements", "Announcements"],
+  ["/mentor/authoring", "Authoring"]
 ] as const;
 
 export default async function MentorLayout({ children }: { children: ReactNode }) {

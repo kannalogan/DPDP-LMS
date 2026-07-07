@@ -6,6 +6,7 @@ import { ProtectedRoute } from "@/features/auth/components/protected-route";
 import { Button } from "@/shared/ui/button";
 import "@/features/student/student.css";
 import "@/features/admin/admin.css";
+import "@/features/course-authoring/authoring.css";
 
 const links = [
   ["/admin/dashboard", "Dashboard"],
@@ -16,7 +17,8 @@ const links = [
   ["/admin/security", "Security"],
   ["/admin/settings", "Settings"],
   ["/admin/branding", "Branding"],
-  ["/admin/announcements", "Announcements"]
+  ["/admin/announcements", "Announcements"],
+  ["/admin/authoring", "Authoring"]
 ] as const;
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {

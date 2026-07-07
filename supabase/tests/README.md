@@ -15,3 +15,5 @@ The RLS and seed test designs are in `docs/35-rls-test-strategy.md` and `docs/36
 `007_mentor_workspace_test.sql` validates the Prompt #015 mentor workspace migration, including mentor/cohort tables, safe projections, controlled RPCs, forced RLS and absence of business seed assignments.
 
 `008_admin_workspace_test.sql` validates the Prompt #016 admin workspace migration, including admin tables, reused organization authority tables, controlled RPCs, RLS, immutable dashboard evidence and no business seed events.
+
+`009_course_authoring_test.sql` validates the Prompt #017 authoring migration, including draft, review, publishing, lock, projection, RPC, RLS, and immutable publication evidence inventory.

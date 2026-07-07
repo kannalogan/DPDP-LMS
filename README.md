@@ -164,6 +164,9 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [ADR-009: Admin workspace operational extensions](docs/55-adr-009-admin-workspace-extensions.md)
 - [Admin Workspace](docs/56-admin-workspace.md)
 - [Admin migration notes](docs/57-admin-migration-notes.md)
+- [ADR-010: Course publishing workflow](docs/58-adr-010-course-publishing-workflow.md)
+- [Course Authoring CMS](docs/59-course-authoring-guide.md)
+- [Course authoring migration notes](docs/60-course-authoring-migration-notes.md)
 
 ### Engineering Standards
 
