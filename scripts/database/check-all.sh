@@ -9,4 +9,5 @@ ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
 "$ROOT/scripts/database/check-learning.sh"
 "$ROOT/scripts/database/check-delivery.sh"
 "$ROOT/scripts/database/check-assessment.sh"
+"$ROOT/scripts/database/check-certificate.sh"
 "$ROOT/scripts/database/check-safety.sh"

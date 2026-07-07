@@ -11,6 +11,7 @@ import { ThemeToggle } from "@/shared/theme/theme-toggle";
 import "@/features/student/student.css";
 import "@/features/learning-delivery/delivery.css";
 import "@/features/assessment-engine/assessment.css";
+import "@/features/certificates/certificates.css";
 
 export default async function StudentLayout({ children }: { children: ReactNode }) {
   const [data, organizations] = await Promise.all([getStudentWorkspace(), listOrganizations()]);

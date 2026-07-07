@@ -7,6 +7,7 @@ import {
   CalendarDays,
   Flag,
   Gauge,
+  GraduationCap,
   Home,
   Search,
   TimerReset
@@ -31,6 +32,7 @@ const navigation = [
   { href: "/student/learning", icon: <BookOpen />, label: "My learning" },
   { href: "/student/courses", icon: <BookOpen />, label: "Courses" },
   { href: "/student/assessments", icon: <Award />, label: "Assessments" },
+  { href: "/student/certificates", icon: <GraduationCap />, label: "Certificates" },
   { href: "/student/progress", icon: <Gauge />, label: "Progress" },
   { href: "/student/timeline", icon: <TimerReset />, label: "Timeline" },
   { href: "/student/goals", icon: <Flag />, label: "Goals" },

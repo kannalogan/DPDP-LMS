@@ -155,6 +155,9 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [Course and Lesson Delivery](docs/46-course-lesson-delivery.md)
 - [ADR-006: Assessment contract reconciliation](docs/47-adr-006-assessment-contract-reconciliation.md)
 - [Enterprise Assessment Engine](docs/48-assessment-engine.md)
+- [ADR-007: Certificate lifecycle contract](docs/49-adr-007-certificate-lifecycle-contract.md)
+- [Enterprise Certificate Engine](docs/50-certificate-engine.md)
+- [Certificate migration notes](docs/51-certificate-migration-notes.md)
 
 ### Engineering Standards
 
