@@ -158,6 +158,9 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [ADR-007: Certificate lifecycle contract](docs/49-adr-007-certificate-lifecycle-contract.md)
 - [Enterprise Certificate Engine](docs/50-certificate-engine.md)
 - [Certificate migration notes](docs/51-certificate-migration-notes.md)
+- [ADR-008: Mentor authorization model](docs/52-adr-008-mentor-authorization-model.md)
+- [Mentor Workspace](docs/53-mentor-workspace.md)
+- [Mentor migration notes](docs/54-mentor-migration-notes.md)
 
 ### Engineering Standards
 

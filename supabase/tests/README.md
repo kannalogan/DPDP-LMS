@@ -11,3 +11,5 @@ The RLS and seed test designs are in `docs/35-rls-test-strategy.md` and `docs/36
 `005_assessment_engine_test.sql` validates the Prompt #013 canonical assessment tables, forced RLS, controlled attempt RPCs, immutable submission, service-only answer keys, and absence of fake assessments.
 
 `006_certificate_engine_test.sql` validates the Prompt #014 canonical certificate tables, forced RLS, controlled certificate RPCs, public projection, immutable lifecycle evidence, and absence of fake certificates.
+
+`007_mentor_workspace_test.sql` validates the Prompt #015 mentor workspace migration, including mentor/cohort tables, safe projections, controlled RPCs, forced RLS and absence of business seed assignments.

@@ -12,6 +12,10 @@ export type PermissionKey =
   | "authorization.role.manage"
   | "authorization.assignment.manage"
   | "learning.catalog.manage"
+  | "assessment.catalog.manage"
+  | "certificate.template.manage"
+  | "certificate.issue"
+  | "mentor.workspace.manage"
   | "platform.access";
 
 export interface ActionResult {
