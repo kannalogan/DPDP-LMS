@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, UserRound } from "lucide-react";
+import { BookOpenCheck, Building2, FileLock2, UserRound } from "lucide-react";
 import type { Route } from "next";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, type ReactNode } from "react";
@@ -17,7 +17,9 @@ import { EmptyState } from "@/shared/ui/feedback";
 
 const destinations: Array<{ href: Route; icon: ReactNode; label: string }> = [
   { href: "/account/profile", icon: <UserRound />, label: "Profile" },
-  { href: "/account/organizations", icon: <Building2 />, label: "Organizations" }
+  { href: "/account/organizations", icon: <Building2 />, label: "Organizations" },
+  { href: "/account/privacy" as Route, icon: <FileLock2 />, label: "Privacy" },
+  { href: "/account/policies" as Route, icon: <BookOpenCheck />, label: "Policies" }
 ];
 
 export function AccountApplicationShell({
@@ -53,7 +55,9 @@ export function AccountApplicationShell({
           <AppFooter
             links={[
               { href: "/account/profile", label: "Profile" },
-              { href: "/account/organizations", label: "Organizations" }
+              { href: "/account/organizations", label: "Organizations" },
+              { href: "/account/privacy", label: "Privacy" },
+              { href: "/account/policies", label: "Policies" }
             ]}
           />
         }

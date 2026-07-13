@@ -11,6 +11,7 @@ import "@/features/question-authoring/question-authoring.css";
 import "@/features/reporting/reporting.css";
 import "@/features/assignments/assignments.css";
 import "@/features/notifications/notifications.css";
+import "@/features/governance/governance.css";
 
 const links = [
   ["/admin/dashboard", "Dashboard"],
@@ -29,7 +30,9 @@ const links = [
   ["/admin/reports", "Reports"],
   ["/admin/assignments", "Assignments"],
   ["/admin/rubrics", "Rubrics"],
-  ["/admin/gradebook", "Gradebook"]
+  ["/admin/gradebook", "Gradebook"],
+  ["/admin/governance", "Governance"],
+  ["/admin/compliance", "Compliance"]
 ] as const;
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {

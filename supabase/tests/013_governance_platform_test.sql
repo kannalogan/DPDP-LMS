@@ -1,0 +1,16 @@
+begin;
+select plan(12);
+select has_table('public','governance_controls','governance controls exist');
+select has_table('public','control_evidence_versions','immutable evidence versions exist');
+select has_table('public','privacy_requests','privacy requests exist');
+select has_table('public','retention_events','retention evidence exists');
+select has_view('public','governance_dashboard_projection','governance dashboard projection exists');
+select has_view('public','reporting_governance_metrics','reporting integration exists');
+select has_function('public','create_control',array['uuid','text','text','text','text'],'create control RPC exists');
+select has_function('public','submit_privacy_request',array['uuid','text','text'],'privacy request RPC exists');
+select has_function('public','run_retention_job',array['uuid'],'retention job RPC exists');
+select ok((select relforcerowsecurity from pg_class where oid='public.governance_controls'::regclass),'governance controls force RLS');
+select ok((select relforcerowsecurity from pg_class where oid='public.privacy_requests'::regclass),'privacy requests force RLS');
+select ok(not exists(select 1 from pg_policies where schemaname='public' and tablename in('governance_controls','privacy_requests') and 'anon'=any(roles)),'no anonymous policies exist');
+select * from finish();
+rollback;

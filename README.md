@@ -182,6 +182,11 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [Notification platform guide](docs/75-notification-platform-guide.md)
 - [Announcement guide](docs/76-announcement-guide.md)
 - [Notification platform migration notes](docs/77-notification-platform-migration-notes.md)
+- [ADR-015: Governance and compliance lifecycle](docs/78-adr-015-governance-compliance-lifecycle.md)
+- [Governance platform guide](docs/79-governance-platform-guide.md)
+- [Audit operations guide](docs/80-audit-operations-guide.md)
+- [DPDP operations guide](docs/81-dpdp-operations-guide.md)
+- [Governance migration notes](docs/82-governance-migration-notes.md)
 
 ### Engineering Standards
 
