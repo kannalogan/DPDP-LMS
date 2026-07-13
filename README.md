@@ -167,6 +167,10 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [ADR-010: Course publishing workflow](docs/58-adr-010-course-publishing-workflow.md)
 - [Course Authoring CMS](docs/59-course-authoring-guide.md)
 - [Course authoring migration notes](docs/60-course-authoring-migration-notes.md)
+- [ADR-011: Question bank architecture](docs/61-adr-011-question-bank-architecture.md)
+- [Question Authoring Guide](docs/62-question-authoring-guide.md)
+- [Assessment Authoring Guide](docs/63-assessment-authoring-guide.md)
+- [Question authoring migration notes](docs/64-question-authoring-migration-notes.md)
 
 ### Engineering Standards
 

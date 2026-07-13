@@ -7,6 +7,7 @@ import { Button } from "@/shared/ui/button";
 import "@/features/student/student.css";
 import "@/features/admin/admin.css";
 import "@/features/course-authoring/authoring.css";
+import "@/features/question-authoring/question-authoring.css";
 
 const links = [
   ["/admin/dashboard", "Dashboard"],
@@ -18,7 +19,8 @@ const links = [
   ["/admin/settings", "Settings"],
   ["/admin/branding", "Branding"],
   ["/admin/announcements", "Announcements"],
-  ["/admin/authoring", "Authoring"]
+  ["/admin/authoring", "Authoring"],
+  ["/admin/question-bank", "Question bank"]
 ] as const;
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {

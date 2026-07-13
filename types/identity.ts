@@ -12,6 +12,7 @@ export type PermissionKey =
   | "authorization.role.manage"
   | "authorization.assignment.manage"
   | "course.authoring.manage"
+  | "question.authoring.manage"
   | "learning.catalog.manage"
   | "assessment.catalog.manage"
   | "certificate.template.manage"
