@@ -1,5 +1,5 @@
 begin;
-select plan(13);
+select plan(17);
 select has_table('public','search_documents','authorized search documents exist');
 select has_table('public','search_saved_queries','private saved searches exist');
 select has_table('public','search_recommendation_results','recommendation results exist');
@@ -13,5 +13,9 @@ select ok((select relforcerowsecurity from pg_class where oid='public.search_doc
 select ok((select relforcerowsecurity from pg_class where oid='public.search_history'::regclass),'search history forces RLS');
 select ok(not exists(select 1 from pg_policies where schemaname='public' and tablename like 'search_%' and 'anon'=any(roles)),'no anonymous search policies exist');
 select ok(exists(select 1 from pg_indexes where schemaname='public' and indexname='search_documents_vector_idx'),'full-text GIN index exists');
+select has_trigger('public','search_documents','search_documents_populate_vector');
+select has_trigger('public','search_document_chunks','search_document_chunks_populate_vector');
+select ok((select attgenerated='' from pg_attribute where attrelid='public.search_documents'::regclass and attname='search_vector'),'document search vector is trigger-populated');
+select ok((select attgenerated='' from pg_attribute where attrelid='public.search_document_chunks'::regclass and attname='search_vector'),'chunk search vector is trigger-populated');
 select * from finish();
 rollback;

@@ -78,11 +78,7 @@ create table if not exists public.search_documents (
   indexed_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   is_active boolean not null default true,
-  search_vector tsvector generated always as (
-    setweight(to_tsvector('simple',coalesce(title,'')),'A') ||
-    setweight(to_tsvector('simple',coalesce(array_to_string(keywords,' '),'')),'B') ||
-    setweight(to_tsvector('simple',coalesce(summary,'')),'C')
-  ) stored,
+  search_vector tsvector not null,
   constraint search_documents_entity_type_check check (entity_type in (
     'course','module','lesson','resource','learning_path','assignment','rubric','gradebook',
     'assessment','question','certificate','announcement','notification','report',
@@ -105,7 +101,7 @@ create table if not exists public.search_document_chunks (
   safe_excerpt text not null,
   content_hash text not null,
   created_at timestamptz not null default now(),
-  search_vector tsvector generated always as (to_tsvector('simple',coalesce(safe_excerpt,''))) stored,
+  search_vector tsvector not null,
   constraint search_document_chunks_position_check check (position >= 0),
   constraint search_document_chunks_hash_check check (content_hash ~ '^[a-f0-9]{64}$'),
   constraint search_document_chunks_unique unique (search_document_id,position)
@@ -350,6 +346,54 @@ create table if not exists public.search_dashboard_events (
   occurred_at timestamptz not null default now(),
   constraint search_dashboard_events_metadata_check check (jsonb_typeof(metadata)='object')
 );
+
+create or replace function private.populate_search_document_vector()
+returns trigger
+language plpgsql
+set search_path=pg_catalog
+as $$
+begin
+  new.search_vector :=
+    pg_catalog.setweight(
+      pg_catalog.to_tsvector('pg_catalog.simple'::regconfig,pg_catalog.coalesce(new.title,'')),
+      'A'
+    ) ||
+    pg_catalog.setweight(
+      pg_catalog.to_tsvector(
+        'pg_catalog.simple'::regconfig,
+        pg_catalog.coalesce(pg_catalog.array_to_string(new.keywords,' '),'')
+      ),
+      'B'
+    ) ||
+    pg_catalog.setweight(
+      pg_catalog.to_tsvector('pg_catalog.simple'::regconfig,pg_catalog.coalesce(new.summary,'')),
+      'C'
+    );
+  return new;
+end
+$$;
+
+create or replace function private.populate_search_document_chunk_vector()
+returns trigger
+language plpgsql
+set search_path=pg_catalog
+as $$
+begin
+  new.search_vector := pg_catalog.to_tsvector(
+    'pg_catalog.simple'::regconfig,
+    pg_catalog.coalesce(new.safe_excerpt,'')
+  );
+  return new;
+end
+$$;
+
+create trigger search_documents_populate_vector
+before insert or update of title,keywords,summary on public.search_documents
+for each row execute function private.populate_search_document_vector();
+
+create trigger search_document_chunks_populate_vector
+before insert or update of safe_excerpt on public.search_document_chunks
+for each row execute function private.populate_search_document_chunk_vector();
 
 create index if not exists search_documents_vector_idx on public.search_documents using gin(search_vector);
 create index if not exists search_documents_title_trgm_idx on public.search_documents using gin(title extensions.gin_trgm_ops);

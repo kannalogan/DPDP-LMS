@@ -68,6 +68,18 @@ describe("search migration safety", () => {
       /search_embeddings|elasticsearch|algolia|meilisearch|opensearch|pinecone|weaviate/i
     );
   });
+  it("populates full-text vectors with deterministic row triggers", () => {
+    expect(migration).not.toMatch(/search_vector\s+tsvector\s+generated\s+always/i);
+    expect(migration).not.toMatch(/generated\s+always\s+as/i);
+    expect(migration).toContain("function private.populate_search_document_vector()");
+    expect(migration).toContain("function private.populate_search_document_chunk_vector()");
+    expect(migration).toContain("before insert or update of title,keywords,summary");
+    expect(migration).toContain("before insert or update of safe_excerpt");
+    expect(migration).toContain("pg_catalog.array_to_string(new.keywords,' ')");
+    expect(migration).toMatch(
+      /setweight\([\s\S]*?'A'[\s\S]*?setweight\([\s\S]*?'B'[\s\S]*?setweight\([\s\S]*?'C'/
+    );
+  });
   it("forces RLS and immutable event evidence", () => {
     expect(migration).toContain("force row level security");
     expect(migration).toContain("reject_search_event_mutation");
