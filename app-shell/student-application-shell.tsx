@@ -3,6 +3,7 @@
 import {
   Award,
   Bell,
+  Bot,
   BookOpen,
   CalendarDays,
   ClipboardCheck,
@@ -46,7 +47,9 @@ const navigation = [
   { href: "/student/inbox", icon: <Bell />, label: "Inbox" },
   { href: "/student/search", icon: <Search />, label: "Search" },
   { href: "/student/discover", icon: <Compass />, label: "Discover" },
-  { href: "/student/recommendations", icon: <Sparkles />, label: "Recommendations" }
+  { href: "/student/recommendations", icon: <Sparkles />, label: "Recommendations" },
+  { href: "/student/ai", icon: <Bot />, label: "AI workspace" },
+  { href: "/student/assistant", icon: <Bot />, label: "Assistant" }
 ];
 
 export function StudentApplicationShell({

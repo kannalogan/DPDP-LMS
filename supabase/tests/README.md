@@ -27,3 +27,5 @@ The RLS and seed test designs are in `docs/35-rls-test-strategy.md` and `docs/36
 `013_governance_platform_test.sql` validates Prompt #022 governance controls, evidence, privacy and retention tables; reporting projections; controlled RPC signatures; forced RLS; and absence of anonymous policies.
 
 `014_search_discovery_platform_test.sql` validates Prompt #023 authorized search documents, private saved/history entities, rule-based recommendation projections, controlled search RPCs, forced RLS, full-text indexing, and absence of anonymous policies.
+
+`015_ai_platform_test.sql` validates Prompt #024 provider-neutral metadata, controlled AI RPCs, forced RLS, immutable evidence, reporting projections, and the absence of credentials, vectors, provider SDK configuration, and anonymous policies.

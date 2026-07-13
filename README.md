@@ -191,6 +191,11 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [Enterprise search architecture guide](docs/84-search-architecture-guide.md)
 - [Rule-based recommendation guide](docs/85-rule-based-recommendation-guide.md)
 - [Search and discovery migration notes](docs/86-search-discovery-migration-notes.md)
+- [ADR-017: Provider-agnostic AI platform foundation](docs/87-adr-017-provider-agnostic-ai-platform.md)
+- [Enterprise AI architecture guide](docs/88-ai-architecture-guide.md)
+- [AI prompt framework guide](docs/89-ai-prompt-framework-guide.md)
+- [AI guardrail guide](docs/90-ai-guardrail-guide.md)
+- [AI platform migration notes](docs/91-ai-platform-migration-notes.md)
 
 ### Engineering Standards
 

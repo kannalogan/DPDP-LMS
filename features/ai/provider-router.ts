@@ -1,4 +1,4 @@
-export type AiProvider = "openai" | "anthropic" | "gemini";
+export type AiProvider = string;
 
 export interface AiGenerationRequest {
   provider?: AiProvider;
@@ -17,9 +17,11 @@ export interface AiGenerationResult {
 }
 
 export async function routeAiGeneration(request: AiGenerationRequest): Promise<AiGenerationResult> {
-  const provider = request.provider ?? "openai";
+  const provider = request.provider?.trim();
 
   throw new Error(
-    `AI provider '${provider}' is not configured yet. Add provider adapters under features/ai/providers.`
+    provider
+      ? `AI provider adapter is unavailable: ${provider}`
+      : "No AI provider adapter is configured."
   );
 }
