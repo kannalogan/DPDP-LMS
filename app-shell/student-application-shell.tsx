@@ -6,11 +6,13 @@ import {
   BookOpen,
   CalendarDays,
   ClipboardCheck,
+  Compass,
   Flag,
   Gauge,
   GraduationCap,
   Home,
   Search,
+  Sparkles,
   TimerReset
 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
@@ -42,7 +44,9 @@ const navigation = [
   { href: "/student/achievements", icon: <Award />, label: "Achievements" },
   { href: "/student/notifications", icon: <Bell />, label: "Notifications" },
   { href: "/student/inbox", icon: <Bell />, label: "Inbox" },
-  { href: "/student/search", icon: <Search />, label: "Search" }
+  { href: "/student/search", icon: <Search />, label: "Search" },
+  { href: "/student/discover", icon: <Compass />, label: "Discover" },
+  { href: "/student/recommendations", icon: <Sparkles />, label: "Recommendations" }
 ];
 
 export function StudentApplicationShell({

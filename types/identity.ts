@@ -20,6 +20,8 @@ export type PermissionKey =
   | "governance.manage"
   | "compliance.review"
   | "privacy.request.manage"
+  | "search.manage"
+  | "search.analytics.read"
   | "learning.catalog.manage"
   | "assessment.catalog.manage"
   | "certificate.template.manage"

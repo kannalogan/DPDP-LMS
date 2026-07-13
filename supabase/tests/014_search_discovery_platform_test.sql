@@ -1,0 +1,17 @@
+begin;
+select plan(13);
+select has_table('public','search_documents','authorized search documents exist');
+select has_table('public','search_saved_queries','private saved searches exist');
+select has_table('public','search_recommendation_results','recommendation results exist');
+select has_view('public','search_document_access_projection','safe document projection exists');
+select has_view('public','search_reporting_metrics','reporting projection exists');
+select has_function('public','search_content',array['text','jsonb','text','integer','integer'],'search RPC exists');
+select has_function('public','search_autocomplete',array['text','integer'],'autocomplete RPC exists');
+select has_function('public','save_search',array['uuid','text','text','jsonb','text'],'saved search RPC exists');
+select has_function('public','refresh_recommendations',array['uuid'],'recommendation refresh RPC exists');
+select ok((select relforcerowsecurity from pg_class where oid='public.search_documents'::regclass),'search documents force RLS');
+select ok((select relforcerowsecurity from pg_class where oid='public.search_history'::regclass),'search history forces RLS');
+select ok(not exists(select 1 from pg_policies where schemaname='public' and tablename like 'search_%' and 'anon'=any(roles)),'no anonymous search policies exist');
+select ok(exists(select 1 from pg_indexes where schemaname='public' and indexname='search_documents_vector_idx'),'full-text GIN index exists');
+select * from finish();
+rollback;

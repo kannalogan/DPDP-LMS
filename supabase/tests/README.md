@@ -25,3 +25,5 @@ The RLS and seed test designs are in `docs/35-rls-test-strategy.md` and `docs/36
 `012_notification_platform_test.sql` validates Prompt #021 notification templates, inbox ownership, controlled preference/read RPCs, reporting projections, and forced RLS.
 
 `013_governance_platform_test.sql` validates Prompt #022 governance controls, evidence, privacy and retention tables; reporting projections; controlled RPC signatures; forced RLS; and absence of anonymous policies.
+
+`014_search_discovery_platform_test.sql` validates Prompt #023 authorized search documents, private saved/history entities, rule-based recommendation projections, controlled search RPCs, forced RLS, full-text indexing, and absence of anonymous policies.

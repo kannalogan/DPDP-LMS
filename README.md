@@ -187,6 +187,10 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [Audit operations guide](docs/80-audit-operations-guide.md)
 - [DPDP operations guide](docs/81-dpdp-operations-guide.md)
 - [Governance migration notes](docs/82-governance-migration-notes.md)
+- [ADR-016: Search and discovery authorization](docs/83-adr-016-search-discovery-authorization.md)
+- [Enterprise search architecture guide](docs/84-search-architecture-guide.md)
+- [Rule-based recommendation guide](docs/85-rule-based-recommendation-guide.md)
+- [Search and discovery migration notes](docs/86-search-discovery-migration-notes.md)
 
 ### Engineering Standards
 
