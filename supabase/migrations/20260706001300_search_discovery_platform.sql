@@ -7,6 +7,8 @@
 -- SYRA-IMMUTABLE: index versions, click/result analytics and dashboard events are append-only
 -- SYRA-SEED: deployment-reference
 
+create extension if not exists pg_trgm with schema extensions;
+
 create table if not exists public.search_indexes (
   id uuid primary key default gen_random_uuid(),
   organization_id uuid references public.organizations(id) on delete restrict,

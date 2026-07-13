@@ -63,7 +63,8 @@ describe("search migration safety", () => {
   });
   it("uses PostgreSQL keyword search without prohibited engines", () => {
     expect(migration).toContain("tsvector");
-    expect(migration).toContain("gin_trgm_ops");
+    expect(migration).toContain("create extension if not exists pg_trgm with schema extensions;");
+    expect(migration.match(/(?:[a-z_]+\.)?gin_trgm_ops/g)).toEqual(["extensions.gin_trgm_ops"]);
     expect(migration).not.toMatch(
       /search_embeddings|elasticsearch|algolia|meilisearch|opensearch|pinecone|weaviate/i
     );
