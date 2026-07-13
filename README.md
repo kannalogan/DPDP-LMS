@@ -171,6 +171,8 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [Question Authoring Guide](docs/62-question-authoring-guide.md)
 - [Assessment Authoring Guide](docs/63-assessment-authoring-guide.md)
 - [Question authoring migration notes](docs/64-question-authoring-migration-notes.md)
+- [Enterprise reporting guide](docs/66-enterprise-reporting-guide.md)
+- [Enterprise reporting migration notes](docs/67-enterprise-reporting-migration-notes.md)
 
 ### Engineering Standards
 
