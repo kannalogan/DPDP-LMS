@@ -13,6 +13,7 @@ import "@/features/learning-delivery/delivery.css";
 import "@/features/assessment-engine/assessment.css";
 import "@/features/certificates/certificates.css";
 import "@/features/assignments/assignments.css";
+import "@/features/notifications/notifications.css";
 
 export default async function StudentLayout({ children }: { children: ReactNode }) {
   const [data, organizations] = await Promise.all([getStudentWorkspace(), listOrganizations()]);

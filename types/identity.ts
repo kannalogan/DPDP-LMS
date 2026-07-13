@@ -15,6 +15,8 @@ export type PermissionKey =
   | "question.authoring.manage"
   | "assignment.authoring.manage"
   | "assignment.grade.manage"
+  | "notification.manage"
+  | "notification.template.manage"
   | "learning.catalog.manage"
   | "assessment.catalog.manage"
   | "certificate.template.manage"

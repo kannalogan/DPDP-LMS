@@ -1,0 +1,13 @@
+begin;
+select plan(9);
+select has_table('public','notification_templates','notification templates exist');
+select has_table('public','notification_deliveries','delivery evidence exists');
+select has_table('public','notification_inbox','inbox exists');
+select has_view('public','notification_inbox_projection','safe inbox projection exists');
+select has_view('public','reporting_notification_performance','reporting projection exists');
+select has_function('public','create_notification',array['uuid','uuid','text','text','jsonb','text'],'create notification RPC exists');
+select has_function('public','mark_notification_read',array['uuid'],'read tracking RPC exists');
+select has_function('public','update_preferences',array['uuid','uuid','text','boolean','text','time without time zone','time without time zone'],'preference RPC exists');
+select ok((select relforcerowsecurity from pg_class where oid='public.notification_inbox'::regclass),'notification inbox forces RLS');
+select * from finish();
+rollback;

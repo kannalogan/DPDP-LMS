@@ -7,6 +7,7 @@ import type {
   StudentCourse,
   StudentGoal,
   StudentLearningSearchResult,
+  StudentNotification,
   StudentProgress,
   StudentWorkspaceRepository
 } from "@/features/student/types";
@@ -335,12 +336,32 @@ export class SupabaseStudentWorkspaceRepository implements StudentWorkspaceRepos
   }
 
   async getStudentNotificationsView(profileId: string, organizationId: string) {
-    void profileId;
-    void organizationId;
+    assertContext(profileId, organizationId);
+    const { data, error } = await this.client
+      .from("notification_inbox_projection")
+      .select("notification_id,type,purpose,title,summary,read_at,created_at")
+      .eq("organization_id", organizationId)
+      .eq("profile_id", profileId)
+      .eq("folder", "inbox")
+      .order("created_at", { ascending: false })
+      .limit(20);
+    throwRepositoryError("load student notifications", error);
     return {
-      items: [],
-      unavailableReason:
-        "Notifications remain an explicit empty view until the approved notification table wave is implemented."
+      items: (data ?? []).map((row) => ({
+        createdAt: row.created_at as string,
+        notificationId: row.notification_id as string,
+        readAt: (row.read_at as string | null) ?? null,
+        summary: (row.summary as string) || (row.purpose as string),
+        title: (row.title as string) || "Notification",
+        type: (row.type === "assessment"
+          ? "assessment_reminder"
+          : row.type === "mentor"
+            ? "mentor_feedback"
+            : row.type === "announcement"
+              ? "system_announcement"
+              : "learning_reminder") as StudentNotification["type"]
+      })),
+      unavailableReason: ""
     };
   }
 

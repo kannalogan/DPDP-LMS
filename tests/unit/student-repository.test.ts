@@ -49,10 +49,48 @@ describe("Supabase student repository mapping", () => {
     });
   });
 
-  it("keeps notification data explicitly unavailable until its table wave", async () => {
-    const repository = new SupabaseStudentWorkspaceRepository({} as SupabaseClient);
+  it("maps the canonical notification inbox into the frozen student DTO", async () => {
+    const query = {
+      eq() {
+        return this;
+      },
+      limit() {
+        return Promise.resolve({
+          data: [
+            {
+              created_at: "2026-07-13T10:00:00.000Z",
+              notification_id: "notification-id",
+              purpose: "assignment.deadline",
+              read_at: null,
+              summary: "Submit by Friday",
+              title: "Assignment due",
+              type: "learning"
+            }
+          ],
+          error: null
+        });
+      },
+      order() {
+        return this;
+      },
+      select() {
+        return this;
+      }
+    };
+    const repository = new SupabaseStudentWorkspaceRepository({
+      from: () => query
+    } as unknown as SupabaseClient);
     const result = await repository.getStudentNotificationsView("profile-id", "organization-id");
-    expect(result.items).toEqual([]);
-    expect(result.unavailableReason).toContain("notification table wave");
+    expect(result.items).toEqual([
+      {
+        createdAt: "2026-07-13T10:00:00.000Z",
+        notificationId: "notification-id",
+        readAt: null,
+        summary: "Submit by Friday",
+        title: "Assignment due",
+        type: "learning_reminder"
+      }
+    ]);
+    expect(result.unavailableReason).toBe("");
   });
 });

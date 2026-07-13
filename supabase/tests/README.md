@@ -21,3 +21,5 @@ The RLS and seed test designs are in `docs/35-rls-test-strategy.md` and `docs/36
 `010_question_authoring_test.sql` validates the Prompt #018 question bank and assessment authoring migration, including draft, import, template, projection, RPC, RLS, canonical runtime reuse, and immutable publication evidence inventory.
 
 `011_assignment_grading_test.sql` validates Prompt #020 assignment ownership, grading release, projections and immutable evidence.
+
+`012_notification_platform_test.sql` validates Prompt #021 notification templates, inbox ownership, controlled preference/read RPCs, reporting projections, and forced RLS.

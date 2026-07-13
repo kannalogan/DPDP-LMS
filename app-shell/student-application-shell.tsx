@@ -41,6 +41,7 @@ const navigation = [
   { href: "/student/calendar", icon: <CalendarDays />, label: "Calendar" },
   { href: "/student/achievements", icon: <Award />, label: "Achievements" },
   { href: "/student/notifications", icon: <Bell />, label: "Notifications" },
+  { href: "/student/inbox", icon: <Bell />, label: "Inbox" },
   { href: "/student/search", icon: <Search />, label: "Search" }
 ];
 

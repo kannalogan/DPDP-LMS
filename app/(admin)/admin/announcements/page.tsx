@@ -4,10 +4,20 @@ import {
   AnnouncementManager
 } from "@/features/admin/components";
 import { canAccessAdminWorkspace, getAdminWorkspace } from "@/features/admin/server";
+import { BroadcastManager } from "@/features/notifications/components";
+import {
+  canAccessNotifications,
+  getNotificationOrganizationId,
+  getNotificationWorkspace
+} from "@/features/notifications/server";
 
 export default async function AdminAnnouncementsPage() {
   if (!(await canAccessAdminWorkspace())) return <AdminPermissionDenied />;
-  const data = await getAdminWorkspace();
+  const [data, communicationData, organizationId] = await Promise.all([
+    getAdminWorkspace(),
+    getNotificationWorkspace(true),
+    getNotificationOrganizationId(true)
+  ]);
   return (
     <>
       <AdminPageHeader
@@ -15,6 +25,12 @@ export default async function AdminAnnouncementsPage() {
         title="Announcements"
       />
       <AnnouncementManager announcements={data?.announcements ?? []} />
+      {organizationId && (await canAccessNotifications(true)) ? (
+        <BroadcastManager
+          announcements={communicationData?.announcements ?? []}
+          organizationId={organizationId}
+        />
+      ) : null}
     </>
   );
 }

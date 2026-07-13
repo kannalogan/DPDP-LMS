@@ -178,6 +178,10 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [Mentor grading guide](docs/71-mentor-grading-guide.md)
 - [Rubric guide](docs/72-rubric-guide.md)
 - [Assignment and grading migration notes](docs/73-assignment-grading-migration-notes.md)
+- [ADR-014: Notification platform lifecycle](docs/74-adr-014-notification-platform-lifecycle.md)
+- [Notification platform guide](docs/75-notification-platform-guide.md)
+- [Announcement guide](docs/76-announcement-guide.md)
+- [Notification platform migration notes](docs/77-notification-platform-migration-notes.md)
 
 ### Engineering Standards
 

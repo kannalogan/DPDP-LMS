@@ -16,4 +16,5 @@ ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
 "$ROOT/scripts/database/check-question-authoring.sh"
 "$ROOT/scripts/database/check-reporting.sh"
 "$ROOT/scripts/database/check-assignments.sh"
+"$ROOT/scripts/database/check-notifications.sh"
 "$ROOT/scripts/database/check-safety.sh"

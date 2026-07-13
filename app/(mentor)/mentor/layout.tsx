@@ -10,6 +10,7 @@ import "@/features/course-authoring/authoring.css";
 import "@/features/question-authoring/question-authoring.css";
 import "@/features/reporting/reporting.css";
 import "@/features/assignments/assignments.css";
+import "@/features/notifications/notifications.css";
 
 const links = [
   ["/mentor/dashboard", "Dashboard"],
@@ -18,6 +19,8 @@ const links = [
   ["/mentor/reviews", "Reviews"],
   ["/mentor/tasks", "Tasks"],
   ["/mentor/announcements", "Announcements"],
+  ["/mentor/notifications", "Notifications"],
+  ["/mentor/inbox", "Inbox"],
   ["/mentor/authoring", "Authoring"],
   ["/mentor/question-bank", "Question bank"],
   ["/mentor/analytics", "Analytics"],

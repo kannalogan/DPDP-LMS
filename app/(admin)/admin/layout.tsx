@@ -10,6 +10,7 @@ import "@/features/course-authoring/authoring.css";
 import "@/features/question-authoring/question-authoring.css";
 import "@/features/reporting/reporting.css";
 import "@/features/assignments/assignments.css";
+import "@/features/notifications/notifications.css";
 
 const links = [
   ["/admin/dashboard", "Dashboard"],
@@ -21,6 +22,8 @@ const links = [
   ["/admin/settings", "Settings"],
   ["/admin/branding", "Branding"],
   ["/admin/announcements", "Announcements"],
+  ["/admin/notifications", "Notifications"],
+  ["/admin/messages", "Messages"],
   ["/admin/authoring", "Authoring"],
   ["/admin/question-bank", "Question bank"],
   ["/admin/reports", "Reports"],
