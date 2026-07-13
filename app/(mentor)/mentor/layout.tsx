@@ -9,6 +9,7 @@ import "@/features/mentor/mentor.css";
 import "@/features/course-authoring/authoring.css";
 import "@/features/question-authoring/question-authoring.css";
 import "@/features/reporting/reporting.css";
+import "@/features/assignments/assignments.css";
 
 const links = [
   ["/mentor/dashboard", "Dashboard"],
@@ -19,7 +20,11 @@ const links = [
   ["/mentor/announcements", "Announcements"],
   ["/mentor/authoring", "Authoring"],
   ["/mentor/question-bank", "Question bank"],
-  ["/mentor/analytics", "Analytics"]
+  ["/mentor/analytics", "Analytics"],
+  ["/mentor/assignments", "Assignments"],
+  ["/mentor/grading", "Grading"],
+  ["/mentor/rubrics", "Rubrics"],
+  ["/mentor/gradebook", "Gradebook"]
 ] as const;
 
 export default async function MentorLayout({ children }: { children: ReactNode }) {

@@ -173,6 +173,11 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [Question authoring migration notes](docs/64-question-authoring-migration-notes.md)
 - [Enterprise reporting guide](docs/66-enterprise-reporting-guide.md)
 - [Enterprise reporting migration notes](docs/67-enterprise-reporting-migration-notes.md)
+- [Assignment authoring guide](docs/69-assignment-authoring-guide.md)
+- [Student submission guide](docs/70-student-submission-guide.md)
+- [Mentor grading guide](docs/71-mentor-grading-guide.md)
+- [Rubric guide](docs/72-rubric-guide.md)
+- [Assignment and grading migration notes](docs/73-assignment-grading-migration-notes.md)
 
 ### Engineering Standards
 

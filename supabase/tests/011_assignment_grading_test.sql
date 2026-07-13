@@ -1,0 +1,12 @@
+begin;
+select plan(8);
+select has_table('public','assignments','assignments exists');
+select has_table('public','assignment_submissions','assignment submissions exist');
+select has_table('public','grading_results','grading results exist');
+select has_table('public','gradebook_events','gradebook events exist');
+select has_view('public','student_assignment_projection','student projection exists');
+select has_view('public','grading_queue_projection','grading projection exists');
+select has_function('public','submit_assignment',array['uuid'],'controlled submission RPC exists');
+select has_function('public','finalize_grade',array['uuid'],'controlled finalization RPC exists');
+select * from finish();
+rollback;
