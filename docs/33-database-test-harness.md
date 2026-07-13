@@ -58,6 +58,8 @@ For Prompt #007 and later approved migrations:
 6. Generate a schema-only diff and require no unexplained output.
 7. Generate TypeScript database types and compare them with the committed artifact.
 
+Prompt #025 adds `scripts/database/check-ai-execution.sh` plus `supabase/tests/016_ai_provider_execution_test.sql`. These gates assert the execution table/view/RPC inventory, forced RLS, immutable evidence, absence of anonymous policies, and absence of provider credentials or prompt/response plaintext columns.
+
 Schema-diff and generated-type gates remain disabled until the trust-foundation runtime suite passes. A destructive local rebuild is separate and requires `SYRA_CONFIRM_LOCAL_RESET=syra-local npm run db:reset-local`.
 
 Supabase documents the local stack, `db lint`, pgTAP-backed `test db`, and migration history behavior in its [CLI guide](https://supabase.com/docs/guides/local-development/cli/getting-started), [testing guidance](https://supabase.com/docs/guides/local-development/cli/testing-and-linting), and [migration guide](https://supabase.com/docs/guides/deployment/database-migrations).

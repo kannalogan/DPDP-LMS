@@ -14,6 +14,20 @@ import {
   RecommendationCards,
   UsageDashboard
 } from "@/features/ai/components";
+import {
+  AiSafetyNotice,
+  CostRateManager,
+  ExecutionAudit,
+  ExecutionPolicyEditor,
+  KillSwitchManager,
+  ModelRoutingManager,
+  ProviderExecutionStatus
+} from "@/features/ai/components/execution";
+import {
+  getAiExecutionAvailability,
+  getAiExecutionAdminOverview,
+  getAiProviderConfigurationStatus
+} from "@/features/ai/execution/server";
 import { canAccessAi, getAiOrganizationId, getAiWorkspace } from "@/features/ai/server";
 import type { AiWorkspaceAccess } from "@/features/ai/types";
 export type AiRouteMode =
@@ -79,18 +93,50 @@ export async function AiRouteView({
   mode: AiRouteMode;
 }) {
   if (!(await canAccessAi(access))) return <AiPermissionDenied />;
-  const [data, organizationId] = await Promise.all([
+  const [data, organizationId, availability] = await Promise.all([
     getAiWorkspace(access),
-    getAiOrganizationId(access)
+    getAiOrganizationId(access),
+    access === "admin" ? Promise.resolve(null) : getAiExecutionAvailability()
   ]);
   if (!data || !organizationId) return <AiPermissionDenied />;
+  const execution =
+    access === "admin"
+      ? await Promise.all([getAiExecutionAdminOverview(), getAiProviderConfigurationStatus()])
+      : null;
   const content =
     mode === "settings" ? (
-      <AISettings data={data} organizationId={organizationId} />
+      <div className="ai-grid">
+        <AISettings data={data} organizationId={organizationId} />
+        {execution ? (
+          <>
+            <ExecutionPolicyEditor organizationId={organizationId} overview={execution[0]} />
+            <KillSwitchManager
+              models={data.models}
+              organizationId={organizationId}
+              providers={data.providers}
+            />
+          </>
+        ) : null}
+      </div>
     ) : mode === "providers" ? (
-      <ProviderManager organizationId={organizationId} providers={data.providers} />
+      <div className="ai-grid">
+        <ProviderManager organizationId={organizationId} providers={data.providers} />
+        {execution ? (
+          <ProviderExecutionStatus configuration={execution[1]} overview={execution[0]} />
+        ) : null}
+      </div>
     ) : mode === "models" ? (
-      <ModelManager models={data.models} providers={data.providers} />
+      <div className="ai-grid">
+        <ModelManager models={data.models} providers={data.providers} />
+        {execution ? (
+          <ModelRoutingManager
+            models={data.models}
+            organizationId={organizationId}
+            overview={execution[0]}
+            providers={data.providers}
+          />
+        ) : null}
+      </div>
     ) : mode === "prompts" ? (
       <PromptEditor
         organizationId={organizationId}
@@ -98,26 +144,55 @@ export async function AiRouteView({
         workflows={data.workflows}
       />
     ) : mode === "guardrails" ? (
-      <GuardrailManager guardrails={data.guardrails} organizationId={organizationId} />
+      <div className="ai-grid">
+        <GuardrailManager guardrails={data.guardrails} organizationId={organizationId} />
+        {execution ? (
+          <KillSwitchManager
+            models={data.models}
+            organizationId={organizationId}
+            providers={data.providers}
+          />
+        ) : null}
+      </div>
     ) : mode === "usage" ? (
-      <UsageDashboard usage={data.usage} />
+      <div className="ai-grid">
+        <UsageDashboard usage={data.usage} />
+        {execution ? <ExecutionAudit overview={execution[0]} /> : null}
+      </div>
     ) : mode === "budgets" ? (
-      <BudgetDashboard budgets={data.budgets} organizationId={organizationId} />
+      <div className="ai-grid">
+        <BudgetDashboard budgets={data.budgets} organizationId={organizationId} />
+        {execution ? (
+          <CostRateManager
+            models={data.models}
+            organizationId={organizationId}
+            providers={data.providers}
+          />
+        ) : null}
+      </div>
     ) : mode === "audit" ? (
-      <ConversationAudit events={data.auditEvents} />
+      <div className="ai-grid">
+        <ConversationAudit events={data.auditEvents} />
+        {execution ? <ExecutionAudit overview={execution[0]} /> : null}
+      </div>
     ) : mode === "assistant" ? (
-      <AssistantPanel />
+      <div className="ai-grid">
+        <AiSafetyNotice degraded={!availability?.available} />
+        <AssistantPanel available={availability?.available ?? false} />
+      </div>
     ) : mode === "recommendations" ? (
       <RecommendationCards />
     ) : mode === "tools" ? (
       <div className="ai-grid">
-        <AssistantPanel />
+        <AiSafetyNotice degraded={!availability?.available} />
+        <AssistantPanel available={availability?.available ?? false} />
         <FeedbackWidget />
       </div>
     ) : (
       <div className="ai-grid">
+        <AiSafetyNotice degraded={!availability?.available} />
         <ConversationViewer conversations={data.conversations} organizationId={organizationId} />
-        <AssistantPanel />
+        <AssistantPanel available={availability?.available ?? false} />
         <RecommendationCards />
       </div>
     );

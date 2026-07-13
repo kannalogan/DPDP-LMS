@@ -1,6 +1,14 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import {
+  costRateSchema,
+  killSwitchSchema,
+  modelRouteSchema,
+  organizationAiPolicySchema,
+  providerTestSchema
+} from "@/features/ai/execution/schema";
+import { testAiProviderConnection } from "@/features/ai/execution/server";
+import {
   capabilitySchema,
   conversationSchema,
   guardrailSchema,
@@ -211,4 +219,193 @@ export async function createConversation(formData: FormData): Promise<ActionResu
   if (error) return { error: "Conversation boundary could not be created.", success: false };
   refresh();
   return { message: "Conversation boundary created.", success: true };
+}
+
+export async function refreshProviderHealth(formData: FormData): Promise<ActionResult> {
+  const parsed = providerTestSchema.safeParse({ provider: formData.get("provider") });
+  if (!parsed.success) return invalid(parsed);
+  try {
+    await enforceServerActionSecurity("ai-provider-health-refresh", 3);
+    const result = await testAiProviderConnection(parsed.data.provider);
+    refresh();
+    return {
+      message: `Provider health is ${result.status}. No credentials were displayed or stored.`,
+      success: true
+    };
+  } catch {
+    return { error: "Provider connection could not be verified.", success: false };
+  }
+}
+
+export async function setProviderKillSwitch(formData: FormData): Promise<ActionResult> {
+  const parsed = killSwitchSchema.safeParse({
+    enabled: formData.get("enabled") === "true",
+    endsAt: optionalField(formData, "endsAt"),
+    modelId: optionalField(formData, "modelId"),
+    organizationId: formData.get("organizationId"),
+    providerId: optionalField(formData, "providerId"),
+    reasonCode: formData.get("reasonCode"),
+    scope: formData.get("scope")
+  });
+  if (!parsed.success) return invalid(parsed);
+  if (!(await authorize(parsed.data.organizationId)))
+    return { error: "AI administration permission required.", success: false };
+  const { error } = await (
+    await client("ai-kill-switch")
+  ).rpc("set_ai_provider_kill_switch", {
+    p_enabled: parsed.data.enabled,
+    p_ends_at: parsed.data.endsAt,
+    p_model_id: parsed.data.modelId,
+    p_organization_id: parsed.data.organizationId,
+    p_provider_id: parsed.data.providerId,
+    p_reason_code: parsed.data.reasonCode,
+    p_scope: parsed.data.scope
+  });
+  if (error) return { error: "Kill switch could not be updated.", success: false };
+  refresh();
+  return { message: "Kill switch updated.", success: true };
+}
+
+export async function setOrganizationAiPolicy(formData: FormData): Promise<ActionResult> {
+  const parsed = organizationAiPolicySchema.safeParse({
+    allowUnknownCost: formData.get("allowUnknownCost") === "true",
+    allowedClassifications: csv(formData, "allowedClassifications"),
+    allowedProviderKeys: csv(formData, "allowedProviderKeys"),
+    allowedRegions: csv(formData, "allowedRegions"),
+    defaultTimeoutMs: Number(formData.get("defaultTimeoutMs")),
+    enabled: formData.get("enabled") === "true",
+    maxConcurrentRequests: Number(formData.get("maxConcurrentRequests")),
+    maxInputCharacters: Number(formData.get("maxInputCharacters")),
+    maxOutputTokens: Number(formData.get("maxOutputTokens")),
+    organizationId: formData.get("organizationId"),
+    piiRedactionRequired: formData.get("piiRedactionRequired") === "true",
+    providerRetentionAllowed: formData.get("providerRetentionAllowed") === "true",
+    restrictedDataAllowed: formData.get("restrictedDataAllowed") === "true"
+  });
+  if (!parsed.success) return invalid(parsed);
+  if (!(await authorize(parsed.data.organizationId)))
+    return { error: "AI administration permission required.", success: false };
+  const { error } = await (
+    await client("ai-execution-policy")
+  ).rpc("set_organization_ai_policy", {
+    p_allow_unknown_cost: parsed.data.allowUnknownCost,
+    p_allowed_classifications: parsed.data.allowedClassifications,
+    p_allowed_provider_keys: parsed.data.allowedProviderKeys,
+    p_allowed_regions: parsed.data.allowedRegions,
+    p_default_timeout_ms: parsed.data.defaultTimeoutMs,
+    p_enabled: parsed.data.enabled,
+    p_max_concurrent_requests: parsed.data.maxConcurrentRequests,
+    p_max_input_characters: parsed.data.maxInputCharacters,
+    p_max_output_tokens: parsed.data.maxOutputTokens,
+    p_organization_id: parsed.data.organizationId,
+    p_pii_redaction_required: parsed.data.piiRedactionRequired,
+    p_provider_retention_allowed: parsed.data.providerRetentionAllowed,
+    p_restricted_data_allowed: parsed.data.restrictedDataAllowed
+  });
+  if (error) return { error: "AI execution policy could not be saved.", success: false };
+  refresh();
+  return { message: "AI execution policy saved.", success: true };
+}
+
+export async function configureAiModelRoute(formData: FormData): Promise<ActionResult> {
+  const parsed = modelRouteSchema.safeParse({
+    allowedClassifications: csv(formData, "allowedClassifications"),
+    allowedRegions: csv(formData, "allowedRegions"),
+    capabilityKey: formData.get("capabilityKey"),
+    isDefault: formData.get("isDefault") === "true",
+    latencyPreference: formData.get("latencyPreference"),
+    maxInputTokens: Number(formData.get("maxInputTokens")),
+    maxOutputTokens: Number(formData.get("maxOutputTokens")),
+    maximumCostMinor: optionalNumber(formData, "maximumCostMinor"),
+    modelId: formData.get("modelId"),
+    organizationId: formData.get("organizationId"),
+    priority: Number(formData.get("priority")),
+    providerId: formData.get("providerId"),
+    status: formData.get("status")
+  });
+  if (!parsed.success) return invalid(parsed);
+  if (!(await authorize(parsed.data.organizationId)))
+    return { error: "AI administration permission required.", success: false };
+  const { error } = await (
+    await client("ai-model-route")
+  ).rpc("configure_ai_model_route", {
+    p_allowed_classifications: parsed.data.allowedClassifications,
+    p_allowed_regions: parsed.data.allowedRegions,
+    p_capability_key: parsed.data.capabilityKey,
+    p_is_default: parsed.data.isDefault,
+    p_latency_preference: parsed.data.latencyPreference,
+    p_max_input_tokens: parsed.data.maxInputTokens,
+    p_max_output_tokens: parsed.data.maxOutputTokens,
+    p_maximum_cost_minor: parsed.data.maximumCostMinor,
+    p_model_id: parsed.data.modelId,
+    p_organization_id: parsed.data.organizationId,
+    p_priority: parsed.data.priority,
+    p_provider_id: parsed.data.providerId,
+    p_status: parsed.data.status
+  });
+  if (error) return { error: "AI model route could not be saved.", success: false };
+  refresh();
+  return { message: "AI model route saved.", success: true };
+}
+
+export async function updateAiCostRate(formData: FormData): Promise<ActionResult> {
+  const parsed = costRateSchema.safeParse({
+    cachedInputCostPerMillion: optionalNumber(formData, "cachedInputCostPerMillion"),
+    currencyCode: formData.get("currencyCode"),
+    effectiveFrom: normalizedDateTime(formData, "effectiveFrom"),
+    effectiveTo: normalizedOptionalDateTime(formData, "effectiveTo"),
+    inputCostPerMillion: optionalNumber(formData, "inputCostPerMillion"),
+    modelId: formData.get("modelId"),
+    organizationId: formData.get("organizationId"),
+    outputCostPerMillion: optionalNumber(formData, "outputCostPerMillion"),
+    providerId: formData.get("providerId"),
+    sourceReferenceHash: formData.get("sourceReferenceHash")
+  });
+  if (!parsed.success) return invalid(parsed);
+  if (!(await authorize(parsed.data.organizationId)))
+    return { error: "AI administration permission required.", success: false };
+  const { error } = await (
+    await client("ai-cost-rate")
+  ).rpc("update_ai_cost_rate", {
+    p_cached_input_cost_per_million: parsed.data.cachedInputCostPerMillion,
+    p_currency_code: parsed.data.currencyCode,
+    p_effective_from: parsed.data.effectiveFrom,
+    p_effective_to: parsed.data.effectiveTo,
+    p_input_cost_per_million: parsed.data.inputCostPerMillion,
+    p_model_id: parsed.data.modelId,
+    p_organization_id: parsed.data.organizationId,
+    p_output_cost_per_million: parsed.data.outputCostPerMillion,
+    p_provider_id: parsed.data.providerId,
+    p_source_reference_hash: parsed.data.sourceReferenceHash
+  });
+  if (error) return { error: "AI cost rate could not be recorded.", success: false };
+  refresh();
+  return { message: "AI cost rate recorded as immutable configuration.", success: true };
+}
+
+function csv(formData: FormData, name: string) {
+  return String(formData.get(name) ?? "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+}
+
+function optionalField(formData: FormData, name: string) {
+  const value = String(formData.get(name) ?? "").trim();
+  return value || null;
+}
+
+function optionalNumber(formData: FormData, name: string) {
+  const value = String(formData.get(name) ?? "").trim();
+  return value ? Number(value) : null;
+}
+
+function normalizedDateTime(formData: FormData, name: string) {
+  const value = String(formData.get(name) ?? "").trim();
+  return value ? new Date(value).toISOString() : value;
+}
+
+function normalizedOptionalDateTime(formData: FormData, name: string) {
+  const value = String(formData.get(name) ?? "").trim();
+  return value ? new Date(value).toISOString() : null;
 }

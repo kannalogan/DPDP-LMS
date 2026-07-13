@@ -14,3 +14,14 @@
 - Missing required environment values are reported by `/api/ready`.
 - Runtime code that requires validated values should call `getEnv()`.
 - Optional integrations must degrade explicitly until configured.
+
+## AI Provider Execution
+
+- `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, and `GEMINI_API_KEY` are optional server-only values.
+- Provider enablement is explicit; a credential alone does not enable execution.
+- No AI credential or AI control variable may use `NEXT_PUBLIC_`.
+- Production startup fails safely when its configured default provider is disabled or lacks credentials.
+- Local development and tests default to all providers disabled and require no network access.
+- Provider base URLs are server-only; production requires HTTPS and rejects embedded credentials, loopback hosts, queries, and fragments.
+
+See [AI Secret Management](../94-ai-secret-management-guide.md).

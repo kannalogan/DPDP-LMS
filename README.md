@@ -93,6 +93,12 @@ Prompt #013 adds the canonical assessment/question/rubric/attempt/evaluation fou
 
 See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [Assessment Engine implementation](docs/48-assessment-engine.md).
 
+## Secure AI Provider Execution
+
+Prompt #025 connects the provider-neutral AI foundation to OpenAI, Anthropic Claude, and Google Gemini through one server-only controlled execution boundary. Providers remain disabled until explicitly enabled and credentialed. Local development and tests require no provider credentials and make no external AI calls.
+
+Execution enforces tenant permission, organization policy, deterministic routing, guardrails, redaction, limits, budget reservation, timeout/retry/circuit behavior, and hash-only immutable evidence. Provider keys never reach the client or PostgreSQL. See [ADR-018](docs/92-adr-018-ai-provider-execution-boundary.md), the [adapter guide](docs/93-ai-provider-adapter-guide.md), and [secret management guide](docs/94-ai-secret-management-guide.md).
+
 ## Documentation
 
 ### Product And Data Architecture
@@ -196,6 +202,13 @@ See [ADR-006](docs/47-adr-006-assessment-contract-reconciliation.md) and the [As
 - [AI prompt framework guide](docs/89-ai-prompt-framework-guide.md)
 - [AI guardrail guide](docs/90-ai-guardrail-guide.md)
 - [AI platform migration notes](docs/91-ai-platform-migration-notes.md)
+- [ADR-018: AI provider execution boundary](docs/92-adr-018-ai-provider-execution-boundary.md)
+- [AI provider adapter guide](docs/93-ai-provider-adapter-guide.md)
+- [AI secret management guide](docs/94-ai-secret-management-guide.md)
+- [AI budget and cost guide](docs/95-ai-budget-and-cost-guide.md)
+- [AI reliability and fallback guide](docs/96-ai-reliability-and-fallback-guide.md)
+- [AI privacy and data handling guide](docs/97-ai-privacy-and-data-handling-guide.md)
+- [AI provider execution migration notes](docs/98-ai-provider-execution-migration-notes.md)
 
 ### Engineering Standards
 

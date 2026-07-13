@@ -21,5 +21,9 @@ SYRA is a domain-neutral, multi-tenant learning platform. DPDP compliance is the
 - Environment validation: `config/env.ts`
 - Typed API errors: `lib/api/errors.ts`
 - Structured logging: `lib/observability/logger.ts`
+- Controlled AI execution: `features/ai/execution/service.ts`
+- Server-only AI secrets: `features/ai/secrets/server-env.ts`
+
+Provider adapters are implementation details behind the controlled AI execution service. Product features cannot invoke OpenAI, Anthropic, or Gemini adapters directly.
 
 See `docs/ARCHITECTURE.md` for the extended engineering architecture.

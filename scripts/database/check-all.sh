@@ -20,4 +20,5 @@ ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
 "$ROOT/scripts/database/check-governance.sh"
 "$ROOT/scripts/database/check-search.sh"
 "$ROOT/scripts/database/check-ai.sh"
+"$ROOT/scripts/database/check-ai-execution.sh"
 "$ROOT/scripts/database/check-safety.sh"

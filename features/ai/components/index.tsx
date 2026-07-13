@@ -727,14 +727,16 @@ export function ConversationTimeline({ conversations }: { conversations: AiConve
     </Card>
   );
 }
-export function AssistantPanel() {
+export function AssistantPanel({ available = false }: { available?: boolean }) {
   return (
     <Card className="ai-panel">
       <PanelTitle icon={Bot} title="Assistant" />
       <div className="ai-callout">
-        <strong>Unavailable</strong>
+        <strong>{available ? "Execution boundary ready" : "Unavailable"}</strong>
         <p className="ai-muted">
-          No approved provider adapter or execution workflow is configured.
+          {available
+            ? "Organization-approved AI capabilities can use the controlled server boundary."
+            : "No approved provider adapter or execution workflow is configured."}
         </p>
       </div>
     </Card>

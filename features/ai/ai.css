@@ -45,6 +45,42 @@
   gap: 1rem;
   min-width: 0;
 }
+.ai-control-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+}
+.ai-definition-list {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+.ai-definition-list div {
+  border-inline-start: 2px solid var(--color-border);
+  padding-inline-start: 0.75rem;
+}
+.ai-definition-list dt,
+.ai-privacy-copy {
+  color: var(--color-muted-foreground);
+}
+.ai-definition-list dd {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.25rem 0 0;
+}
+.ai-notice {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.75rem;
+}
+.ai-notice > svg {
+  flex: 0 0 auto;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+.ai-notice p,
+.ai-privacy-copy {
+  margin: 0.35rem 0 0;
+}
 .ai-panel-heading,
 .ai-list-item,
 .ai-status-row {
