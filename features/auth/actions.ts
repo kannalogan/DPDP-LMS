@@ -10,8 +10,13 @@ import {
   registerSchema,
   resetPasswordSchema
 } from "@/features/auth/schemas";
+import {
+  classifyRegistrationFailure,
+  registrationFailureResult
+} from "@/features/auth/registration-errors";
 import { requireVerifiedUser, resolveIdentityContext } from "@/features/session/server";
 import { ORGANIZATION_COOKIE } from "@/features/session/constants";
+import { logger } from "@/lib/observability/logger";
 import { enforceServerActionSecurity, sha256 } from "@/lib/security/request";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { ActionResult } from "@/types/identity";
@@ -70,6 +75,7 @@ export async function login(formData: FormData): Promise<ActionResult> {
 export async function register(formData: FormData): Promise<ActionResult> {
   const parsed = registerSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) return invalid(parsed);
+  const traceId = crypto.randomUUID();
   try {
     await enforceServerActionSecurity("register", 5);
     const client = await createSupabaseServerClient();
@@ -85,10 +91,28 @@ export async function register(formData: FormData): Promise<ActionResult> {
         emailRedirectTo: `${getPublicEnv().appUrl}/auth/callback?next=/account/profile`
       }
     });
-    if (error) return { error: genericAuthError, success: false };
+    if (error) {
+      const failure = classifyRegistrationFailure(error);
+      logger.error("Registration failed", {
+        authCode: failure.code,
+        category: failure.kind,
+        errorName: failure.name,
+        status: failure.status,
+        traceId
+      });
+      return registrationFailureResult(failure, traceId);
+    }
     return { message: "Check your email to verify your account before signing in.", success: true };
-  } catch {
-    return { error: genericAuthError, success: false };
+  } catch (error) {
+    const failure = classifyRegistrationFailure(error);
+    logger.error("Registration failed", {
+      authCode: failure.code,
+      category: failure.kind,
+      errorName: failure.name,
+      status: failure.status,
+      traceId
+    });
+    return registrationFailureResult(failure, traceId);
   }
 }
 
