@@ -33,3 +33,4 @@ The RLS and seed test designs are in `docs/35-rls-test-strategy.md` and `docs/36
 `016_ai_provider_execution_test.sql` validates Prompt #025 execution policies, model routing, budgets, immutable attempts and outcomes, controlled RPCs, redacted projections, forced RLS, and the absence of provider credentials.
 
 `017_ai_learning_assistant_test.sql` validates Prompt #026 learner session, flashcard, quiz, plan, recommendation and event entities; controlled generation RPCs; metadata-only projections; and forced RLS.
+`018_community_live_learning_test.sql` validates the Prompt #027 tables, safe projections, controlled RPC surface, forced RLS, and immutable communication evidence.

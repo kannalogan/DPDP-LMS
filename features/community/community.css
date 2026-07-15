@@ -1,0 +1,318 @@
+.community-header {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.community-header h1 {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  margin: 0.25rem 0;
+}
+.community-header p {
+  color: hsl(var(--color-muted-foreground));
+  margin: 0;
+  max-width: 72ch;
+}
+.community-subnav {
+  border-block: 1px solid hsl(var(--color-border));
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  padding: 0.5rem 1rem;
+}
+.community-subnav a {
+  border-radius: var(--radius-sm);
+  flex: 0 0 auto;
+  font-size: 0.875rem;
+  font-weight: 650;
+  padding: 0.55rem 0.75rem;
+}
+.community-subnav a:hover,
+.community-subnav a:focus-visible {
+  background: hsl(var(--color-muted));
+  outline: 0;
+}
+.community-workspace,
+.community-list,
+.community-form,
+.community-thread,
+.message-stream {
+  display: grid;
+  gap: 1rem;
+}
+.community-workspace {
+  padding: 1rem;
+}
+.community-grid,
+.community-metrics {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+.community-panel,
+.conversation-sidebar,
+.message-panel {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+.community-panel-heading,
+.community-actions,
+.community-filters,
+.editor-toolbar,
+.live-metrics,
+.office-row,
+.discussion-post > header,
+.chat-message > header {
+  align-items: center;
+  display: flex;
+  gap: 0.65rem;
+}
+.community-panel-heading,
+.discussion-post > header,
+.chat-message > header,
+.office-row {
+  justify-content: space-between;
+}
+.community-panel-heading h2,
+.community-panel h3 {
+  font-size: 1.05rem;
+  margin: 0;
+}
+.community-panel-heading svg,
+.topic-symbol svg,
+.community-actions svg,
+.live-metrics svg {
+  height: 1rem;
+  width: 1rem;
+}
+.community-kicker {
+  color: hsl(var(--color-muted-foreground));
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.community-filters {
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+.community-filters > * {
+  flex: 1 1 12rem;
+}
+.topic-row,
+.live-row,
+.group-card {
+  align-items: flex-start;
+  border-block-start: 1px solid hsl(var(--color-border));
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  padding-block: 1rem;
+}
+.topic-row:first-child,
+.live-row:first-child,
+.group-card:first-child {
+  border-block-start: 0;
+}
+.topic-row p,
+.live-row p,
+.group-card p,
+.discussion-post p,
+.chat-message p {
+  color: hsl(var(--color-muted-foreground));
+  margin: 0.35rem 0;
+  overflow-wrap: anywhere;
+}
+.topic-symbol {
+  align-items: center;
+  background: hsl(var(--color-muted));
+  border-radius: var(--radius-sm);
+  display: flex;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+.community-form label {
+  display: grid;
+  font-size: 0.875rem;
+  font-weight: 650;
+  gap: 0.35rem;
+}
+.editor-toolbar,
+.community-actions {
+  flex-wrap: wrap;
+}
+.discussion-post,
+.chat-message {
+  border-block-start: 1px solid hsl(var(--color-border));
+  display: grid;
+  gap: 0.75rem;
+  padding-block: 1rem;
+}
+.discussion-post:first-of-type,
+.chat-message:first-child {
+  border-block-start: 0;
+}
+.discussion-post.is-solution {
+  border-inline-start: 3px solid hsl(var(--color-success));
+  padding-inline-start: 1rem;
+}
+.discussion-post time,
+.chat-message time,
+.conversation-sidebar small,
+.typing-indicator {
+  color: hsl(var(--color-muted-foreground));
+  display: block;
+  font-size: 0.75rem;
+}
+.nested-replies {
+  border-inline-start: 2px solid hsl(var(--color-border));
+  display: grid;
+  margin-inline-start: 1rem;
+  padding-inline-start: 1rem;
+}
+.messaging-layout {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(220px, 0.36fr) minmax(0, 1fr);
+  min-height: 34rem;
+}
+.conversation-sidebar {
+  align-content: start;
+}
+.conversation-sidebar nav {
+  display: grid;
+}
+.conversation-sidebar nav a,
+.conversation-sidebar .conversation-row {
+  align-items: center;
+  border-block-start: 1px solid hsl(var(--color-border));
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  min-width: 0;
+  padding-block: 0.8rem;
+}
+.conversation-sidebar nav a span,
+.conversation-sidebar .conversation-row span {
+  min-width: 0;
+}
+.conversation-sidebar nav strong,
+.conversation-sidebar .conversation-row strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.message-stream {
+  align-content: start;
+  max-height: 34rem;
+  overflow-y: auto;
+}
+.message-composer {
+  border-block-start: 1px solid hsl(var(--color-border));
+  display: grid;
+  gap: 0.75rem;
+  padding-block-start: 1rem;
+}
+.live-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.live-metrics span {
+  align-items: center;
+  display: flex;
+  gap: 0.3rem;
+}
+.live-stage {
+  align-content: center;
+  background: #172421;
+  color: #f5fbf8;
+  display: grid;
+  justify-items: start;
+  min-height: 20rem;
+  padding: 2rem;
+}
+.live-stage > svg {
+  height: 2rem;
+  width: 2rem;
+}
+.live-stage p {
+  color: #bfd3cc;
+  max-width: 62ch;
+}
+.attendance-summary {
+  display: grid;
+  gap: 0.5rem;
+}
+.attendance-summary strong {
+  font-size: 2rem;
+}
+.attendance-summary progress {
+  width: 100%;
+}
+.group-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.form-columns {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr 8rem;
+}
+@media (min-width: 900px) {
+  .community-header,
+  .community-workspace {
+    padding: 1.5rem;
+  }
+  .community-subnav {
+    padding-inline: 1.5rem;
+  }
+  .community-panel-wide {
+    grid-column: span 2;
+  }
+}
+@media (max-width: 760px) {
+  .messaging-layout {
+    grid-template-columns: 1fr;
+  }
+  .conversation-sidebar nav {
+    max-height: 15rem;
+    overflow-y: auto;
+  }
+}
+@media (max-width: 560px) {
+  .community-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .topic-row,
+  .live-row,
+  .group-card {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .topic-row > .ui-badge,
+  .group-card > form,
+  .live-row > .live-metrics {
+    grid-column: 2;
+  }
+  .community-actions form,
+  .community-actions button,
+  .community-header .ui-button {
+    width: 100%;
+  }
+  .form-columns {
+    grid-template-columns: 1fr;
+  }
+  .nested-replies {
+    margin-inline-start: 0.35rem;
+    padding-inline-start: 0.65rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .community-workspace *,
+  .community-header * {
+    scroll-behavior: auto;
+    transition-duration: 0.01ms !important;
+  }
+}

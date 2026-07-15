@@ -211,6 +211,13 @@ Execution enforces tenant permission, organization policy, deterministic routing
 - [AI reliability and fallback guide](docs/96-ai-reliability-and-fallback-guide.md)
 - [AI privacy and data handling guide](docs/97-ai-privacy-and-data-handling-guide.md)
 - [AI provider execution migration notes](docs/98-ai-provider-execution-migration-notes.md)
+- [ADR-019: AI Learning Assistant boundary](docs/99-adr-019-ai-learning-assistant.md)
+- [AI Learning Assistant guide](docs/100-ai-learning-assistant-guide.md)
+- [AI Learning Assistant migration notes](docs/101-ai-learning-assistant-migration-notes.md)
+- [ADR-020: Community and live learning boundary](docs/102-adr-020-community-live-learning.md)
+- [Community platform guide](docs/103-community-platform-guide.md)
+- [Live learning guide](docs/104-live-learning-guide.md)
+- [Community and live learning migration notes](docs/105-community-live-learning-migration-notes.md)
 
 ### Engineering Standards
 
