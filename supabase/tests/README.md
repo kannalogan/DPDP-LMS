@@ -29,3 +29,7 @@ The RLS and seed test designs are in `docs/35-rls-test-strategy.md` and `docs/36
 `014_search_discovery_platform_test.sql` validates Prompt #023 authorized search documents, private saved/history entities, rule-based recommendation projections, controlled search RPCs, forced RLS, full-text indexing, and absence of anonymous policies.
 
 `015_ai_platform_test.sql` validates Prompt #024 provider-neutral metadata, controlled AI RPCs, forced RLS, immutable evidence, reporting projections, and the absence of credentials, vectors, provider SDK configuration, and anonymous policies.
+
+`016_ai_provider_execution_test.sql` validates Prompt #025 execution policies, model routing, budgets, immutable attempts and outcomes, controlled RPCs, redacted projections, forced RLS, and the absence of provider credentials.
+
+`017_ai_learning_assistant_test.sql` validates Prompt #026 learner session, flashcard, quiz, plan, recommendation and event entities; controlled generation RPCs; metadata-only projections; and forced RLS.

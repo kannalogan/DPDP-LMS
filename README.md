@@ -87,6 +87,8 @@ Prompt #012 adds the authenticated `/student/courses` catalog, course/module/les
 
 Set the private server-only `SYRA_NOTE_ENCRYPTION_KEY` to a base64-encoded 32-byte value before enabling notes. Missing configuration fails closed. See the [delivery implementation](docs/46-course-lesson-delivery.md) and [ADR-005](docs/45-adr-005-delivery-routing-and-note-encryption.md).
 
+AI learning assistance is additive to the provider execution boundary. Set the private server-only `SYRA_AI_LEARNING_ENCRYPTION_KEY` to a base64-encoded 32-byte value before enabling tutor conversations or generated study artifacts. All requests still pass through Prompt #025 routing, guardrails, budgets, redaction, retries, and audit evidence. See [ADR-019](docs/99-adr-019-ai-learning-assistant.md) and the [AI Learning Assistant Guide](docs/100-ai-learning-assistant-guide.md).
+
 ## Enterprise Assessment Engine
 
 Prompt #013 adds the canonical assessment/question/rubric/attempt/evaluation foundation and protected `/student/assessments` delivery routes. Learner writes use controlled RPCs with ownership, enrollment-course, tenant, window, expiry, and immutable-submission checks. Answer keys remain service-only and no automatic or AI grading is implemented.

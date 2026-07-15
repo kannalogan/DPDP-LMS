@@ -18,6 +18,7 @@
 ## AI Provider Execution
 
 - `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, and `GEMINI_API_KEY` are optional server-only values.
+- `SYRA_AI_LEARNING_ENCRYPTION_KEY` is a server-only base64-encoded 32-byte key for AI learning conversations and generated study artifacts.
 - Provider enablement is explicit; a credential alone does not enable execution.
 - No AI credential or AI control variable may use `NEXT_PUBLIC_`.
 - Production startup fails safely when its configured default provider is disabled or lacks credentials.
