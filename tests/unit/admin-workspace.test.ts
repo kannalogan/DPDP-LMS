@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { mapDomain, mapOrganization, summarizeMetrics } from "@/features/admin/mappers";
 import { adminStatusTone, formatAdminDate } from "@/features/admin/selectors";
@@ -8,6 +9,10 @@ import {
 } from "@/features/admin/schemas";
 
 describe("admin workspace", () => {
+  it("keeps function-valued table columns inside the client boundary", () => {
+    expect(readFileSync("features/admin/components/index.tsx", "utf8")).toMatch(/^"use client";/);
+  });
+
   it("maps organization overview rows into DTOs", () => {
     expect(
       mapOrganization({

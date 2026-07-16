@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   mapAssignment,
@@ -14,6 +15,11 @@ import { rubricLevelRangeIsValid, rubricWeightsAreValid } from "@/features/assig
 import { assignmentObjectPath, validateAssignmentFile } from "@/features/assignments/storage";
 import { canTransitionAssignment } from "@/features/assignments/workflow";
 describe("assignment platform domain", () => {
+  it("keeps function-valued table columns inside the client boundary", () => {
+    expect(readFileSync("features/assignments/components/index.tsx", "utf8")).toMatch(
+      /^"use client";/
+    );
+  });
   it("supports approved assignment types", () =>
     expect(assignmentTypeSchema.safeParse("portfolio_submission").success).toBe(true));
   it("validates assignment scoring constraints", () =>

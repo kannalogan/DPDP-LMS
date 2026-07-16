@@ -30,17 +30,21 @@ export function Button({
   variant,
   ...props
 }: ButtonProps) {
-  const Component = asChild ? Slot : "button";
+  const classes = cn(buttonVariants({ size, variant }), className);
+
+  if (asChild) {
+    return (
+      <Slot aria-busy={loading || undefined} className={classes} {...props}>
+        {children}
+      </Slot>
+    );
+  }
+
   return (
-    <Component
-      aria-busy={loading || undefined}
-      className={cn(buttonVariants({ size, variant }), className)}
-      type={asChild ? undefined : type}
-      {...props}
-    >
+    <button aria-busy={loading || undefined} className={classes} type={type} {...props}>
       {loading ? <span aria-hidden="true" className="ui-spinner" /> : null}
       {children}
-    </Component>
+    </button>
   );
 }
 export { buttonVariants };

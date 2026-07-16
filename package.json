@@ -31,6 +31,7 @@
     "db:local:validate": "sh scripts/database/validate-local.sh",
     "db:reset-local": "sh scripts/database/local-supabase.sh reset",
     "db:local:stop": "sh scripts/database/local-supabase.sh stop",
+    "local:bootstrap": "node scripts/local/bootstrap-workspaces.mjs",
     "ci": "npm run db:check && npm run lint && npm run typecheck && npm run format && npm run test && npm run build",
     "prepare": "husky"
   },

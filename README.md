@@ -101,6 +101,16 @@ Prompt #025 connects the provider-neutral AI foundation to OpenAI, Anthropic Cla
 
 Execution enforces tenant permission, organization policy, deterministic routing, guardrails, redaction, limits, budget reservation, timeout/retry/circuit behavior, and hash-only immutable evidence. Provider keys never reach the client or PostgreSQL. See [ADR-018](docs/92-adr-018-ai-provider-execution-boundary.md), the [adapter guide](docs/93-ai-provider-adapter-guide.md), and [secret management guide](docs/94-ai-secret-management-guide.md).
 
+## Local Workspace Acceptance
+
+After registering and verifying three distinct local identities, set `LOCAL_BOOTSTRAP_STUDENT_EMAIL`, `LOCAL_BOOTSTRAP_MENTOR_EMAIL`, and `LOCAL_BOOTSTRAP_ADMIN_EMAIL` in `.env.local`, then run:
+
+```bash
+npm run local:bootstrap
+```
+
+The command refuses non-local, deployment, and CI environments. It creates no users or credentials and is not part of migrations or automatic seeding. See the [local workspace acceptance bootstrap guide](docs/106-local-workspace-acceptance-bootstrap.md).
+
 ## Documentation
 
 ### Product And Data Architecture
@@ -218,6 +228,7 @@ Execution enforces tenant permission, organization policy, deterministic routing
 - [Community platform guide](docs/103-community-platform-guide.md)
 - [Live learning guide](docs/104-live-learning-guide.md)
 - [Community and live learning migration notes](docs/105-community-live-learning-migration-notes.md)
+- [Local workspace acceptance bootstrap](docs/106-local-workspace-acceptance-bootstrap.md)
 
 ### Engineering Standards
 

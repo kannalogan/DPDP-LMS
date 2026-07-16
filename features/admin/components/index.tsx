@@ -1,3 +1,5 @@
+"use client";
+
 import { Building2, Globe2, Megaphone, ShieldCheck, Users } from "lucide-react";
 import Link from "next/link";
 import type { Route } from "next";
